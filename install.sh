@@ -39,7 +39,9 @@ chown root ogn-rf
 chmod a+s  ogn-rf
 
 cp Template.conf myPlace.conf
-# Then edit the file, to set-up the receiver: enter your crystal correction, GSM frequency for calibration, geographical position, APRS name. (You will find more details about receiver's configuration here)
+# Then edit the file, to set-up the receiver:
+# - enter your crystal correction
+# - GSM frequency for calibration, geographical position, APRS name
 nano myPlace.conf
 
 wget http://download.glidernet.org/common/service/rtlsdr-ogn -O /etc/init.d/rtlsdr-ogn
@@ -47,7 +49,9 @@ wget http://download.glidernet.org/common/service/rtlsdr-ogn.conf -O /etc/rtlsdr
 chmod +x /etc/init.d/rtlsdr-ogn
 update-rc.d rtlsdr-ogn defaults
 
-# Update /etc/rtlsdr-ogn.conf according to name of your configuration file, by replacing SampleConfigurationFileNameToChange.conf by the name of your config file and pi with your actual username
+# Update /etc/rtlsdr-ogn.conf according to name of your configuration file
+# by replacing SampleConfigurationFileNameToChange.conf by the name of your config file (e.g. myPlace.conf)
+# and pi with your actual username
 nano /etc/rtlsdr-ogn.conf
 
 service rtlsdr-ogn start
