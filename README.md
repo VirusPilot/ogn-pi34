@@ -2,11 +2,10 @@
 Script to built an OGN server on a Pi4 (Pi3) based on a fresh Buster Image
 # Automatic Setup
 ```
-sudo su
-cd ~/
-apt update
-apt install git -y
+sudo apt update
+sudo apt full-upgrade
+sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi4.git
-cd ogn-pi4
+cp -f ogn-pi4/install.sh .
 ./install.sh
 ```

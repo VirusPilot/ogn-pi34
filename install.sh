@@ -1,65 +1,63 @@
 #!/bin/bash
 #set -x
 
-apt update
-apt full-upgrade -y
-apt install rtl-sdr -y
-apt install libconfig9 -y
-apt install libjpeg8 -y
-apt install lynx -y
-apt install ntpdate -y
-apt install ntp -y
-apt install procserv -y
-apt install telnet -y
+sudo apt install librtlsdr0 -y
+sudo apt install librtlsdr-dev -y
+sudo apt install rtl-sdr -y
+sudo apt install libconfig9 -y
+sudo apt install libjpeg8 -y
+sudo apt install lynx -y
+sudo apt install ntpdate -y
+sudo apt install ntp -y
+sudo apt install procserv -y
+sudo apt install telnet -y
 
 wget http://ftp.debian.org/debian/pool/main/f/fftw3/libfftw3-bin_3.3.5-3_armhf.deb
 wget http://ftp.debian.org/debian/pool/main/f/fftw3/libfftw3-dev_3.3.5-3_armhf.deb
 wget http://ftp.debian.org/debian/pool/main/f/fftw3/libfftw3-double3_3.3.5-3_armhf.deb
 wget http://ftp.debian.org/debian/pool/main/f/fftw3/libfftw3-single3_3.3.5-3_armhf.deb
-dpkg -i libfftw*.deb
+sudo dpkg -i libfftw*.deb
 rm libfftw*.deb
-apt-mark hold libfftw3-bin
-apt-mark hold libfftw3-dev
-apt-mark hold libfftw3-double3
-apt-mark hold libfftw3-single3
+sudo apt-mark hold libfftw3-bin
+sudo apt-mark hold libfftw3-dev
+sudo apt-mark hold libfftw3-double3
+sudo apt-mark hold libfftw3-single3
 
-echo blacklist rtl2832 | tee /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist r820t | tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist rtl2830 | tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist dvb_usb_rtl28xxu | tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
+echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-glidernet-blacklist.conf
+echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
+echo blacklist rtl2830 | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
+echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
 
 wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-latest.tgz
 tar xvzf rtlsdr-ogn-bin-ARM-latest.tgz
-rm
+rm *.tgz
 cd rtlsdr-ogn
 mkfifo ogn-rf.fifo
-chown root gsm_scan
-chmod a+s gsm_scan
-chown root ogn-rf
-chmod a+s  ogn-rf
+sudo chown root gsm_scan
+sudo chmod a+s gsm_scan
+sudo chown root ogn-rf
+sudo chmod a+s  ogn-rf
 
-cp Template.conf myPlace.conf
-# Then edit the file, to set-up the receiver:
+cp -f Template.conf myPlace.conf
+# - edit myPlace.conf, to set-up the receiver:
 # - enter your crystal correction
 # - GSM frequency for calibration, geographical position, APRS name
 nano myPlace.conf
 
-wget http://download.glidernet.org/common/service/rtlsdr-ogn -O /etc/init.d/rtlsdr-ogn
-wget http://download.glidernet.org/common/service/rtlsdr-ogn.conf -O /etc/rtlsdr-ogn.conf
-chmod +x /etc/init.d/rtlsdr-ogn
-update-rc.d rtlsdr-ogn defaults
+sudo wget http://download.glidernet.org/common/service/rtlsdr-ogn -O /etc/init.d/rtlsdr-ogn
+sudo wget http://download.glidernet.org/common/service/rtlsdr-ogn.conf -O /etc/rtlsdr-ogn.conf
+sudo chmod +x /etc/init.d/rtlsdr-ogn
+sudo update-rc.d rtlsdr-ogn defaults
 
 # Update /etc/rtlsdr-ogn.conf according to name of your configuration file
 # by replacing SampleConfigurationFileNameToChange.conf by the name of your config file (e.g. myPlace.conf)
 # and pi with your actual username
-nano /etc/rtlsdr-ogn.conf
-
-service rtlsdr-ogn start
+sudo nano /etc/rtlsdr-ogn.conf
 
 echo
 read -t 1 -n 10000 discard
 read -p "Reboot now? [y/n]"
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  reboot
+  sudo reboot
 fi
