@@ -2,7 +2,7 @@
 Script to built an OGN station on a Pi4 (Pi3) based on a fresh Raspbian Buster Lite image
 
 ## preparation
-During the setup process you will be asked to edit (using nano) two files, one of them is "myPlace.conf" for which you should have the following credentials at hand:
+During the setup process you will be asked to edit (using nano) two files, one of them is `myPlace.conf` for which you should have the following credentials at hand:
 - SDR device number (to avoid conflicts if you have multiple SDRs installed)
 - SDR frequency correction [ppm] (this can also be measured and mofified accordingly post install if unknown)
 ```
@@ -29,7 +29,7 @@ APRS:
 } ;
 ```
 
-The second file to be edited during the setup process is "rtlsdr-ogn.conf" in which "SampleConfigurationFileNameToChange.conf" needs to be replaced with "myPlace.conf".
+The second file to be edited during the setup process is `rtlsdr-ogn.conf` in which `SampleConfigurationFileNameToChange.conf` needs to be replaced with `myPlace.conf`.
 
 ## automatic setup
 ```
@@ -45,6 +45,7 @@ cp -f ogn-pi4/install.sh .
 sudo raspi-config
 ```
 ## post install modifications
-- GSM gain and frequency for calibration
-- OGN gain
-- SDR frequency correction [ppm]
+### GSM gain/frequency and ppm calibration
+- see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
+### OGN gain
+- tbd.
