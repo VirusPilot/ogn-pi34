@@ -42,7 +42,9 @@ cp -f Template.conf myPlace.conf
 # - edit myPlace.conf, to set-up the receiver:
 # - enter your crystal correction
 # - GSM frequency for calibration, geographical position, APRS name
-nano myPlace.conf
+sudo nano myPlace.conf
+
+sudo wget --no-check-certificate http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC
 
 sudo wget http://download.glidernet.org/common/service/rtlsdr-ogn -O /etc/init.d/rtlsdr-ogn
 sudo wget http://download.glidernet.org/common/service/rtlsdr-ogn.conf -O /etc/rtlsdr-ogn.conf
