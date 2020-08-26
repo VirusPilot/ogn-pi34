@@ -34,7 +34,6 @@ The second file to be edited during the setup process is `rtlsdr-ogn.conf` in wh
 ## automatic setup
 ```
 sudo apt update
-sudo apt full-upgrade
 sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi4.git
 cp -f ogn-pi4/install.sh .
