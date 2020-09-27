@@ -1,7 +1,7 @@
 #!/bin/bash
 #set -x
 
-timedatectl set-timezone Europe/Berlin
+sudo timedatectl set-timezone Europe/Berlin
 
 sudo apt install build-essential -y
 sudo apt install cmake -y
@@ -36,7 +36,7 @@ echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blac
 
 # download and unpack version 0.2.8
 cd
-wget http://download.glidernet.org/rpi-gpu/rtlsdr-ogn-bin-RPI-GPU-0.2.8.tgz # for Pi3
+#wget http://download.glidernet.org/rpi-gpu/rtlsdr-ogn-bin-RPI-GPU-0.2.8.tgz # for Pi3
 #wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.2.8.tgz # for Pi4
 tar xvzf *.tgz
 rm *.tgz
