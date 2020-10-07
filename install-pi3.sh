@@ -50,9 +50,11 @@ sudo chmod a+s  rtlsdr-ogn
 sudo mknod gpu_dev c 100 0
 
 cp -f Template.conf myPlace.conf
-# - edit myPlace.conf, to set-up the receiver:
-# - enter your crystal correction
-# - GSM frequency for calibration, geographical position, APRS name
+echo
+echo "Please edit myPlace.conf, to set-up the receiver:"
+echo "enter your ppm correction, GSM frequency for calibration, geographical position and APRS name"
+echo
+read -p "Press any key to continue"
 sudo nano myPlace.conf
 
 sudo wget --no-check-certificate http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC
@@ -62,9 +64,11 @@ sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
 sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo update-rc.d rtlsdr-ogn defaults
 
-# Update /etc/rtlsdr-ogn.conf according to name of your configuration file
-# by replacing SampleConfigurationFileNameToChange.conf by the name of your config file (e.g. myPlace.conf)
-# and pi with your actual username
+echo
+echo "Please Update /etc/rtlsdr-ogn.conf according to name of your configuration file by replacing"
+echo "SampleConfigurationFileNameToChange.conf by the name of your config file (e.g. myPlace.conf)"
+echo
+read -p "Press any key to continue"
 sudo nano /etc/rtlsdr-ogn.conf
 
 echo
