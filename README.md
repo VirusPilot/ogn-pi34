@@ -36,8 +36,7 @@ The second file to be edited during the setup process is `rtlsdr-ogn.conf` in wh
 sudo apt update
 sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
-./ogn-pi34/install-pi3.sh # for Pi3
-./ogn-pi34/install-pi4.sh # for Pi4
+./ogn-pi34/install-pi34.sh
 ```
 ## change from Ethernet to WiFi connection
 ```
