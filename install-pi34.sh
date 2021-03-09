@@ -3,18 +3,7 @@
 
 sudo timedatectl set-timezone Europe/Berlin
 
-sudo apt install build-essential -y
-sudo apt install cmake -y
-sudo apt install libconfig9 -y
-sudo apt install libfftw3-bin -y
-sudo apt install libjpeg8 -y
-sudo apt install libtool -y
-sudo apt install libusb-1.0-0-dev -y
-sudo apt install lynx -y
-sudo apt install ntp -y
-sudo apt install ntpdate -y
-sudo apt install procserv -y
-sudo apt install telnet -y
+sudo apt install build-essential cmake libconfig9 libfftw3-bin libjpeg8 libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
 
 # install librtlsdr
 cd
@@ -23,7 +12,7 @@ git clone https://github.com/osmocom/rtl-sdr.git
 cd rtl-sdr
 mkdir build
 cd build
-cmake ../ -DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON
+cmake ../ -DENABLE_ZEROCOPY=0
 make
 sudo make install
 sudo ldconfig
