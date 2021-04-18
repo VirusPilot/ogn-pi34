@@ -3,12 +3,13 @@ Script to built an OGN station on a Pi4 (Pi3) based on a fresh Raspbian Buster L
 
 ## preparation
 During the setup process you will be asked to edit (using nano) two files, one of them is `myPlace.conf` for which you should have the following credentials at hand:
-- SDR device number (to avoid conflicts if you have multiple SDRs installed)
+- SDR device number (to avoid conflicts if you have multiple SDRs installed); alternatively if you know already the serial number of your SDR, you can use that to automatically select the appropriate SDR
 - SDR frequency correction [ppm] (this can also be measured and mofified accordingly post install if unknown)
 ```
 RF:
 {
   Device   = 0;            # Device index for OGN reception. E.g. check "sudo rtl_eeprom -d 0" or "-d 1", ...
+  #DeviceSerial = "868";   # alternative
   FreqCorr = 0;            # [ppm] "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
 }
 ```
