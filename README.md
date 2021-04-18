@@ -29,7 +29,7 @@ APRS:
 } ;
 ```
 
-The second file to be edited during the setup process is `rtlsdr-ogn.conf` in which `SampleConfigurationFileNameToChange.conf` needs to be replaced with `myPlace.conf`.
+The second file to be edited during the setup process is `rtlsdr-ogn.conf` in which `Template.conf` needs to be replaced with `myPlace.conf`.
 
 ## automatic setup
 ```
