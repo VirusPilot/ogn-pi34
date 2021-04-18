@@ -17,6 +17,7 @@ make
 sudo make install
 sudo ldconfig
 cd
+rm -rf rtl-sdr
 
 # prevent kernel modules claiming use of the USB DVB-T dongle
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-glidernet-blacklist.conf
@@ -50,7 +51,7 @@ echo
 read -p "Press any key to continue"
 sudo nano myPlace.conf
 
-sudo wget --no-check-certificate http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC
+sudo wget --no-check-certificate https://download.osgeo.org/proj/vdatum/egm96_15/outdated/WW15MGH.DAC
 
 # install rtlsdr-ogn to run OGN receiver as a service
 sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
