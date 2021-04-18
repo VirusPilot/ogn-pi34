@@ -16,6 +16,7 @@ cmake ../ -DENABLE_ZEROCOPY=0
 make
 sudo make install
 sudo ldconfig
+cd
 
 # prevent kernel modules claiming use of the USB DVB-T dongle
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-glidernet-blacklist.conf
