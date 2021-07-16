@@ -1,5 +1,5 @@
 # ogn-pi34
-Script to built an OGN station on a Pi4 (Pi3) based on a fresh Raspbian Buster Lite image and OGN version 0.2.8
+Script to built an OGN station on a Pi4 (Pi3) based on a fresh Raspbian Buster Lite 32bit Image and OGN version 0.2.8
 
 ## preparation
 During the setup process you will be asked to edit (using nano) two files, one of them is `myPlace.conf` for which you should have the following credentials at hand:
@@ -47,4 +47,4 @@ sudo raspi-config
 ### GSM gain/frequency and ppm calibration
 - see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
 ### OGN gain
-- tbd.
+- the SDR gain should be set such that the RF input noise is only a couple of dBs
