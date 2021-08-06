@@ -53,7 +53,6 @@ echo
 read -p "Press any key to continue"
 sudo nano myPlace.conf
 
-#sudo wget --no-check-certificate https://download.osgeo.org/proj/vdatum/egm96_15/outdated/WW15MGH.DAC
 sudo wget http://download.glidernet.org/common/WW15MGH.DAC
 
 # install rtlsdr-ogn to run OGN receiver as a service
