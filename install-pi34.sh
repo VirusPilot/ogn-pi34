@@ -69,7 +69,7 @@ sudo nano /etc/rtlsdr-ogn.conf
 
 echo
 read -t 1 -n 10000 discard
-read -p "Reboot now? [y/n]"
+read -p "Reboot now? [y/n]" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   sudo reboot
