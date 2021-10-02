@@ -1,4 +1,4 @@
-# ogn-pi34
+# ogn-pi34 (32bit)
 Script to built an OGN station on a Pi4 (Pi3) based on a fresh Raspbian Buster Lite 32bit Image and OGN version 0.2.8
 
 ## preparation
