@@ -57,7 +57,7 @@ sudo update-rc.d rtlsdr-ogn defaults
 
 echo
 echo "Please Update /etc/rtlsdr-ogn.conf according to name of your configuration file by replacing"
-echo "SampleConfigurationFileNameToChange.conf by the name of your config file (e.g. myPlace.conf)"
+echo "Template.conf by the name of your config file (e.g. myPlace.conf)"
 echo
 read -p "Press any key to continue"
 sudo nano /etc/rtlsdr-ogn.conf
