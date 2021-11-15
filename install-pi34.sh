@@ -29,10 +29,15 @@ echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.co
 
 # download and unpack version 0.2.9
 git clone https://github.com/pjalocha/ogn-frb-search
-if grep -q "Pi 4" /proc/device-tree/model; then
-  tar xvf ogn-frb-search/rtlsdr-ogn/rtlsdr-ogn-bin-RPI-GPU-0.2.9_Jessie.tgz
-else
-  tar xvf ogn-frb-search/rtlsdr-ogn/rtlsdr-ogn-bin-ARM-0.2.9_Jessie.tgz
+ARCH=$(arch)
+if [ $ARCH == aarch64 ]; then # arm64
+  tar xvf ogn-frb-search/rtlsdr-ogn/rtlsdr-ogn-bin-arm64-0.2.9_Buster.tgz
+else # armhf
+  if grep -q "Pi 4" /proc/device-tree/model; then
+    tar xvf ogn-frb-search/rtlsdr-ogn/rtlsdr-ogn-bin-RPI-GPU-0.2.9_Jessie.tgz
+  else # "Pi 3"
+    tar xvf ogn-frb-search/rtlsdr-ogn/rtlsdr-ogn-bin-ARM-0.2.9_Jessie.tgz
+  fi
 fi
 
 cd rtlsdr-ogn
