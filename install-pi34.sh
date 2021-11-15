@@ -3,7 +3,7 @@
 
 sudo timedatectl set-timezone Europe/Berlin
 
-sudo apt install build-essential cmake libconfig9 libfftw3-bin libjpeg8 libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
+sudo apt install build-essential cmake libconfig9 libfftw3-bin libjpeg62-turbo-dev libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
 
 # install librtlsdr
 cd
