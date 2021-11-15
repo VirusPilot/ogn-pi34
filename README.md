@@ -1,5 +1,5 @@
 # ogn-pi34
-Script to built an OGN station on a Pi3 or Pi4 based on either Raspbian Lite Image and OGN version 0.2.9
+Script to built an OGN station on a Pi3 or Pi4 based on the Raspbian Lite Image and OGN version 0.2.9
 
 ## preparation
 During the setup process you will be asked to edit (using nano) two files, one of them is `myPlace.conf` for which you should have the following credentials at hand:
