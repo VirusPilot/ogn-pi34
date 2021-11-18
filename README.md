@@ -1,5 +1,8 @@
 # ogn-pi34 (armhf and arm64)
-Script to built an OGN station on a Pi3 or Pi4, based on Raspbian Lite (armhf and arm64) and OGN version 0.2.9
+Script to built an OGN station on a Pi3 or Pi4, based on RasPiOS Lite (armhf and arm64) and OGN version 0.2.9, using the latest images from here:
+
+- http://downloads.raspberrypi.org/raspios_lite_armhf/images/ (32bit, "armhf")
+- http://downloads.raspberrypi.org/raspios_lite_arm64/images/ (64bit, "arm64")
 
 ## preparation
 During the setup process you will be asked to edit (using nano) two files, one of them is `myPlace.conf` for which you should have the following credentials at hand:
