@@ -20,7 +20,7 @@ RF:
   FreqCorr = 0;            # [ppm] "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
 }
 ```
-- GPS coordinates and altitude for your OGN station, GeoidSepar needs to be disabled:
+- GPS coordinates and altitude for your OGN station:
 ```
 Position:
 { Latitude   =   +48.0000; # [deg] Antenna coordinates
