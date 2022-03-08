@@ -45,13 +45,12 @@ sudo chown root rtlsdr-ogn
 sudo chmod a+s  rtlsdr-ogn
 sudo mknod gpu_dev c 100 0
 
-cp -f Template.conf myPlace.conf
 echo
-echo "Please edit myPlace.conf, to set-up the receiver:"
+echo "Please edit Template.conf, to set-up the receiver:"
 echo "enter your ppm correction, GSM frequency for calibration, geographical position and APRS name"
 echo
 read -p "Press any key to continue"
-sudo nano myPlace.conf
+sudo nano Template.conf
 
 sudo wget http://download.glidernet.org/common/WW15MGH.DAC
 
@@ -59,13 +58,6 @@ sudo wget http://download.glidernet.org/common/WW15MGH.DAC
 sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
 sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo update-rc.d rtlsdr-ogn defaults
-
-echo
-echo "Please Update /etc/rtlsdr-ogn.conf according to name of your configuration file by replacing"
-echo "Template.conf by the name of your config file (e.g. myPlace.conf)"
-echo
-read -p "Press any key to continue"
-sudo nano /etc/rtlsdr-ogn.conf
 
 echo
 read -t 1 -n 10000 discard
