@@ -1,5 +1,5 @@
 # ogn-pi34 (armhf and arm64)
-Script to built an OGN station on a Pi 2 Zero 2W, Pi3 or Pi4, based on RasPiOS Lite (armhf and arm64) and OGN version 0.2.9, flashing the latest images from here with etcher (arm64 is recommended):
+Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on RasPiOS Lite (armhf and arm64) and OGN version 0.2.9, flashing the latest images from here with etcher (arm64 is recommended):
 
 - http://downloads.raspberrypi.org/raspios_lite_armhf/images/ (32bit, "armhf")
 - http://downloads.raspberrypi.org/raspios_lite_arm64/images/ (64bit, "arm64")
