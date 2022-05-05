@@ -1,12 +1,13 @@
 # ogn-pi34 (armhf and arm64)
-Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on RasPiOS Lite (armhf and arm64) and OGN version 0.2.9, flashing the latest images from here with etcher (arm64 is recommended):
+Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and RasPiOS Lite (armhf and arm64), using the latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
 
-- http://downloads.raspberrypi.org/raspios_lite_armhf/images/ (32bit, "armhf")
-- http://downloads.raspberrypi.org/raspios_lite_arm64/images/ (64bit, "arm64")
-
-After the successful flash, remove the SD card and plug it into your PC again to further prepare for the setup procedure:
-- copy empty ssh file to /boot directory of the SD card
-- optional for Pi3 and Pi4, **mandatory for Pi Zero 2W: create wpa_supplicant.conf**, using e.g. https://www.pistar.uk/wifi_builder.php (required to enable connecting to your local WiFi) and then copy wpa_supplicant.conf to /boot directory of the SD card
+## prepare script for Pi3B, Pi4B or Pi Zero 2W:
+- flash latest 32bit or 64bit RasPiOS Lite Image, using the latest Raspberry Pi Imager with the following settings:
+  - select appropriate hostname
+  - enable ssh
+  - enable user pi with password
+  - configure WiFi (particularly important for Pi Zero 2 W)
+- boot and wait until your Pi is connected to your LAN or WiFi
 
 ## preparation of OGN credentials
 During the setup process you will be asked to edit (using nano) `Template.conf` for which you should have the following credentials at hand:
