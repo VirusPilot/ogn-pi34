@@ -1,12 +1,12 @@
-# ogn-pi34 (armhf and arm64)
-Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and RasPiOS Lite (armhf and arm64), using the latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
+# ogn-pi34
+Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and **RasPiOS Lite** (32bit or 64bit), using latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
 
 ## prepare script for Pi3B, Pi4B or Pi Zero 2W:
-- flash latest 32bit or 64bit RasPiOS Lite Image, using the latest Raspberry Pi Imager with the following settings:
+- flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
   - select appropriate hostname
   - enable ssh
   - enable user pi with password
-  - configure WiFi (particularly important for Pi Zero 2 W)
+  - configure WiFi (particularly important for Pi Zero 2W)
 - boot and wait until your Pi is connected to your LAN or WiFi
 
 ## preparation of OGN credentials
