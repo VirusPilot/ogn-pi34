@@ -1,23 +1,21 @@
 #!/bin/bash
 #set -x
 
-sudo timedatectl set-timezone Europe/Berlin
+sudo apt install git build-essential libconfig9 libfftw3-bin libjpeg62-turbo-dev libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
 
-sudo apt install build-essential cmake libconfig9 libfftw3-bin libjpeg62-turbo-dev libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
-
-# install librtlsdr
-cd
-rm -rf rtl-sdr
-git clone https://github.com/osmocom/rtl-sdr.git
-cd rtl-sdr
-mkdir build
-cd build
-cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON
-make
-sudo make install
+ARCH=$(arch)
+if [ $ARCH == aarch64 ]; then # arm64
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_arm64.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_arm64.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_arm64.deb
+else # armhf
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_armhf.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_armhf.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_armhf.deb
+fi
+sudo dpkg -i *.deb
+rm -f *.deb
 sudo ldconfig
-cd
-rm -rf rtl-sdr
 
 # prevent kernel modules claiming use of the USB DVB-T dongle
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-glidernet-blacklist.conf
