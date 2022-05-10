@@ -19,22 +19,24 @@ RF:
   Device   = 0;            # Device index for OGN reception. E.g. check "sudo rtl_eeprom -d 0" or "-d 1", ...
   #DeviceSerial = "868";   # alternative
   FreqCorr = 0;            # [ppm] "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
-}
+};
 ```
 - GPS coordinates and altitude for your OGN station:
 ```
 Position:
-{ Latitude   =   +48.0000; # [deg] Antenna coordinates
+{ 
+  Latitude   =   +48.0000; # [deg] Antenna coordinates
   Longitude  =    +9.0000; # [deg]
   Altitude   =        100; # [m]   Altitude above sea leavel
-} ;
+};
 ```
 - APRS name (please remove the `#` in front of `Call` and change `SampleAPRSnameToChange` to your APRS callsign):
 ```
 APRS:
-{ Call = "SampleAPRSnameToChange";      # APRS callsign (max. 9 characters)
+{
+  Call = "SampleAPRSnameToChange";      # APRS callsign (max. 9 characters)
                                         # Please refer to http://wiki.glidernet.org/receiver-naming-convention
-} ;
+};
 ```
 - in case you plan to combine the OGN station with a dump1090 feeder, the following addition is recommended:
 ```
@@ -43,10 +45,17 @@ HTTP:
   Port = 8082;
 };
 ```
+- in case you plan to feed OGN traffic to OpenSky, the following additional line in the "Demodulator" section is necessary:
+```
+Demodulator:
+{ 
+  MergeServer = "flarm-collector.opensky-network.org:20002";
+};
+```
 
 ## automatic setup
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
-- ssh pi@raspberrypi.local (passwd: raspberry)
+- connect to your pi using ssh
 ```
 sudo apt update
 sudo apt install git -y
