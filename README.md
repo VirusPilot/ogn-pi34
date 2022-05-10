@@ -36,6 +36,13 @@ APRS:
                                         # Please refer to http://wiki.glidernet.org/receiver-naming-convention
 } ;
 ```
+- in case you plan to combine the OGN station with a dump1090 feeder, the following addition is recommended:
+```
+HTTP:
+{
+  Port = 8082;
+};
+```
 
 ## automatic setup
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
