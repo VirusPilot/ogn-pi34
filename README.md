@@ -52,6 +52,14 @@ Demodulator:
   MergeServer = "flarm-collector.opensky-network.org:20002";
 };
 ```
+- in case you want to contribute with your OGN station to the Fast Radio Bursts (FRBs) project (https://arxiv.org/abs/1701.01475), you need to add the following:
+```
+FRB:
+{
+  DetectSNR = 10.0;
+  Server = "ogn3.glidernet.org:50000";
+};
+```
 
 ## automatic setup
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
