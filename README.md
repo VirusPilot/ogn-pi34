@@ -77,4 +77,4 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ### OGN gain
 - the SDR gain should be set such that the RF input noise is only a couple of dBs
 ### nightly reboot at 1 am
-- execute the following: `crontab -l | { cat; echo "0 1 * * * /sbin/reboot"; } | crontab -` 
+- execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save 
