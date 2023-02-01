@@ -21,6 +21,16 @@ RF:
   FreqCorr = 0;            # [ppm] "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
 };
 ```
+- enable SDR autogain (adding MinNoise and MaxNoise values):
+```
+  OGN:
+  {
+    CenterFreq = 868.8;    # [MHz] with 868.8MHz and 2MHz bandwidth you can capture all systems: FLARM/OGN/FANET/PilotAware
+    Gain       =  50.0;    # [dB]  Normally use full gain, unless intermodulation occurs of you run with an LNA, then you need to find best value
+    MinNoise   =   2.0;    # default minimum allowed noise
+    MaxNoise   =   8.0;    # default maximum allowed noise
+  };
+```
 - GPS coordinates and altitude for your OGN station:
 ```
 Position:
@@ -74,7 +84,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ## post install modifications
 ### GSM gain/frequency and ppm calibration
 - see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
-### OGN gain
-- the SDR gain should be set such that the RF input noise is only a couple of dBs
+### OGN manual gain
+- in case the SDR gain is set manually, it should be set such that the RF input noise isonly a couple of dBs
 ### nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save 
