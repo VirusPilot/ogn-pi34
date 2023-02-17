@@ -1,21 +1,19 @@
 #!/bin/bash
 #set -x
 
-sudo apt install git build-essential libconfig9 libfftw3-bin libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
+sudo apt install git build-essential libconfig9 libfftw3-bin libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet cmake -y
 
-ARCH=$(arch)
-if [ $ARCH == aarch64 ]; then # arm64
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_arm64.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_arm64.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_arm64.deb
-else # armhf
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_armhf.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_armhf.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_armhf.deb
-fi
-sudo dpkg -i *.deb
-rm -f *.deb
+# install librtlsdr from source
+cd || exit
+git clone https://github.com/osmocom/rtl-sdr.git
+cd rtl-sdr || exit
+mkdir build
+cd build || exit
+cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON
+make
+sudo make install
 sudo ldconfig
+cd || exit
 
 # prevent kernel modules claiming use of the USB DVB-T dongle
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-glidernet-blacklist.conf
@@ -27,19 +25,30 @@ echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.co
 
 # unpack version 0.2.9
 ARCH=$(arch)
-if [ $ARCH == aarch64 ]; then # arm64
-  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_BullsEye.tgz
-else # armhf
-  tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_Buster.tgz
+DIST=$(lsb_release -r -s)
+if [ "$ARCH" == aarch64 ] && [ "$DIST" == 11 ]; then
+  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz # Bullseye 64-bit
+else
+  if [ "$ARCH" == armv7l ] && [ "$DIST" == 11 ]; then
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz # Bullseye 32-bit
+  else
+    if [ "$ARCH" == armv7l ] && [ "$DIST" == 10 ]; then
+      tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz # Buster 32-bit
+    else
+      if [ "$ARCH" == armv7l ]; then
+        tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz # Stretch 32-bit
+      fi
+    fi
+  fi
 fi
 
-cd rtlsdr-ogn
+cd rtlsdr-ogn || exit
 sudo chown root gsm_scan
 sudo chmod a+s gsm_scan
 sudo chown root ogn-rf
-sudo chmod a+s  ogn-rf
+sudo chmod a+s ogn-rf
 sudo chown root rtlsdr-ogn
-sudo chmod a+s  rtlsdr-ogn
+sudo chmod a+s rtlsdr-ogn
 sudo mknod gpu_dev c 100 0
 
 echo
