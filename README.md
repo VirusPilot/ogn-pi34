@@ -1,6 +1,12 @@
 # ogn-pi34
 Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and **RasPiOS Lite** (32bit or 64bit), using latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
 
+# supported RasPiOS and Pi versions
+- `rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz`: Bullseye (v11.x) **64-bit**, Pi Zero 2W, Pi3 or Pi4
+- `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz`: Bullseye (v11.x) and Buster (v10.x) **32-bit**, Pi Zero 2W, Pi3 or Pi4
+- `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz`: Stretch (v9.x) 32-bit, Pi Zero 2W or Pi3
+- `rtlsdr-ogn-bin-x64-0.2.9_ubuntu_cosmic.tgz` (not used by the script, please install manually on your x64 hardware)
+
 ## prepare script for Pi3B, Pi4B or Pi Zero 2W:
 - flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
   - select appropriate hostname
@@ -85,6 +91,6 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ### GSM gain/frequency and ppm calibration
 - see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
 ### OGN manual gain
-- in case the SDR gain is set manually, it should be set such that the RF input noise isonly a couple of dBs
+- in case the SDR gain is set manually, it should be set such that the RF input noise is only a couple of dBs
 ### nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save 
