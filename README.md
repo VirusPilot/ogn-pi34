@@ -1,11 +1,15 @@
 # ogn-pi34
 Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and **RasPiOS Lite** (32bit or 64bit), using latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
 
-# supported RasPiOS and Pi versions
+## script supported RasPiOS and Pi versions
 - `rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz`: Bullseye (v11.x) **64-bit**, Pi Zero 2W, Pi3 or Pi4
 - `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz`: Bullseye (v11.x) and Buster (v10.x) **32-bit**, Pi Zero 2W, Pi3 or Pi4
 - `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz`: Stretch (v9.x) 32-bit, Pi Zero 2W or Pi3
-- `rtlsdr-ogn-bin-x64-0.2.9_ubuntu_cosmic.tgz` (not used by the script, please install manually on your x64 hardware)
+
+## packages for x86 and x64 based thin-clients, please install them manually
+- `rtlsdr-ogn-bin-x64-0.2.9_debian_bullseye.tgz`
+- `rtlsdr-ogn-bin-x64-0.2.9_ubuntu_cosmic.tgz`
+- `rtlsdr-ogn-bin-x86-0.2.9_debian_buster.tgz`
 
 ## prepare script for Pi3B, Pi4B or Pi Zero 2W:
 - flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
