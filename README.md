@@ -1,10 +1,13 @@
 # ogn-pi34
-Script to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and **RasPiOS Lite** (32bit or 64bit), using latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
+scripts to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and **RasPiOS Lite** (32bit or 64bit), using latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
 
-## script supported RasPiOS and Pi versions
+the alternative script which makes use of the GPU on the Pi3 to reduce CPU workload
+
+## supported RasPiOS and Pi versions
 - `rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz`: Bullseye (v11.x) **64-bit**, Pi Zero 2W, Pi3 or Pi4
 - `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz`: Bullseye (v11.x) and Buster (v10.x) **32-bit**, Pi Zero 2W, Pi3 or Pi4
 - `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz`: Stretch (v9.x) 32-bit, Pi Zero 2W or Pi3
+- `rtlsdr-ogn-bin-RPI-GPU-0.2.9_raspbian_stretch.tgz`: GPU version for Stretch and Buster, 32-bit, Pi3
 
 ## packages for x86 and x64 based thin-clients, please install them manually
 - `rtlsdr-ogn-bin-x64-0.2.9_debian_bullseye.tgz`
@@ -81,7 +84,7 @@ FRB:
 };
 ```
 
-## automatic setup
+## automatic setup (standard script)
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
 - connect to your pi using ssh
 ```
@@ -90,7 +93,15 @@ sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34.sh
 ```
-- reboot
+
+## automatic setup (alternative script with GPU code for Pi3)
+```
+sudo apt update
+sudo apt install git -y
+git clone https://github.com/VirusPilot/ogn-pi34.git
+./ogn-pi34/install-pi3-gpu.sh
+```
+
 ## post install modifications
 ### GSM gain/frequency and ppm calibration
 - see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
