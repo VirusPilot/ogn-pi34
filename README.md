@@ -1,7 +1,7 @@
 # ogn-pi34
 scripts to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and **RasPiOS Lite** (32bit or 64bit), using latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
 
-the alternative script which makes use of the GPU on the Pi3 to reduce CPU workload
+the alternative script makes use of the GPU on the Pi3 to reduce CPU workload
 
 ## supported RasPiOS and Pi versions
 - `rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz`: Bullseye (v11.x) **64-bit**, Pi Zero 2W, Pi3 or Pi4
