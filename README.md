@@ -41,26 +41,27 @@
 ## preparation of OGN credentials
 During the setup process you will be asked to edit (using nano) `Template.conf` for which you should have the following credentials at hand:
 - SDR device number (to avoid conflicts if you have multiple SDRs installed); alternatively if you know already the serial number of your SDR, you can use that to automatically select the appropriate SDR
-- SDR frequency correction [ppm] (this can also be measured and modified accordingly post install if unknown)
+- SDR ppm calibration (only required for non-TCXO SDRs), this can also be measured and modified accordingly post install if unknown
 ```
 RF:
 {
-  Device   = 0;            # Device index for OGN reception. E.g. check "sudo rtl_eeprom -d 0" or "-d 1", ...
-  #DeviceSerial = "868";   # alternative
+  Device   = 0;            # SDR selection by device index, can be verified with "sudo rtl_eeprom -d 0" or "-d 1", ...
+  #DeviceSerial = "868";   # SDR selection by serial number (as an alternative)
   FreqCorr = 0;            # [ppm] "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
+                           # SDRs with TCXO: have near zero frequency correction and you can ommit this parameter
 };
 ```
 - SDR autogain target range (adding MinNoise and MaxNoise values):
 ```
   OGN:
   {
-    CenterFreq = 868.8;    # [MHz] with 868.8MHz and 2MHz bandwidth you can capture all systems: FLARM/OGN/FANET/PilotAware
+    CenterFreq = 868.8;    # [MHz] with 868.8MHz and 2MHz bandwidth you can capture all systems: FLARM/OGN/FANET/PilotAware...
     Gain       =  50.0;    # [dB]  this is the startup gain, will be automatically adjusted
-    MinNoise   =   2.0;    # default minimum allowed noise
-    MaxNoise   =   8.0;    # default maximum allowed noise
+    MinNoise   =   2.0;    # default minimum allowed noise, you can ommit this parameter
+    MaxNoise   =   8.0;    # default maximum allowed noise, you can ommit this parameter
   };
 ```
-- GPS coordinates and altitude for your OGN station:
+- **important:** GPS coordinates and altitude for your OGN station:
 ```
 Position:
 { 
@@ -119,7 +120,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ```
 
 ## post install modifications
-### GSM gain/frequency and ppm calibration
+### SDR ppm calibration (only required for non-TCXO SDRs)
 - see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
 ### nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save 
