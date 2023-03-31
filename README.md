@@ -41,7 +41,7 @@
 ## preparation of OGN credentials
 During the setup process you will be asked to edit (using nano) `Template.conf` for which you should have the following credentials at hand:
 - SDR device number (to avoid conflicts if you have multiple SDRs installed); alternatively if you know already the serial number of your SDR, you can use that to automatically select the appropriate SDR
-- SDR frequency correction [ppm] (this can also be measured and mofified accordingly post install if unknown)
+- SDR frequency correction [ppm] (this can also be measured and modified accordingly post install if unknown)
 ```
 RF:
 {
