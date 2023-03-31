@@ -1,4 +1,6 @@
-### latest improvement: **ADS-L** (experimental) is supported
+### latest improvements:
+- **ADS-L** (experimental) is supported
+- **SDR autogain** is enabled to avoid crossmodulation
 
 # ogn-pi34
 - script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
@@ -48,12 +50,12 @@ RF:
   FreqCorr = 0;            # [ppm] "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
 };
 ```
-- enable SDR autogain (adding MinNoise and MaxNoise values):
+- SDR autogain target range (adding MinNoise and MaxNoise values):
 ```
   OGN:
   {
     CenterFreq = 868.8;    # [MHz] with 868.8MHz and 2MHz bandwidth you can capture all systems: FLARM/OGN/FANET/PilotAware
-    Gain       =  50.0;    # [dB]  Normally use full gain, unless intermodulation occurs of you run with an LNA, then you need to find best value
+    Gain       =  50.0;    # [dB]  this is the startup gain, will be automatically adjusted
     MinNoise   =   2.0;    # default minimum allowed noise
     MaxNoise   =   8.0;    # default maximum allowed noise
   };
@@ -119,7 +121,5 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ## post install modifications
 ### GSM gain/frequency and ppm calibration
 - see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
-### OGN manual gain
-- in case the SDR gain is set manually, it should be set such that the RF input noise is only a couple of dBs
 ### nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save 
