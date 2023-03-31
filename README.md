@@ -1,7 +1,21 @@
-# ogn-pi34
-scripts to built an OGN station on a Pi Zero 2W, Pi3 or Pi4, based on OGN version 0.2.9 and **RasPiOS Lite** (32bit or 64bit), using latest Raspberry Pi Imager from here: https://www.raspberrypi.com/software/
+### latest improvement: **ADS-L** (experimental) is supported
 
-the alternative script makes use of the GPU on the Pi3 to reduce CPU workload
+# ogn-pi34
+- script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
+- the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload
+- Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
+- Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
+- latest 0.2.9 versions support the following protocols:
+  - FLARM
+  - OGN
+  - **SafeSky**
+  - PilotAware
+  - SPOT
+  - Garmin InReach
+  - Skymaster
+  - FANET (paragliders)
+  - Spidertracks
+  - **ADS-L** (experimental)
 
 ## supported RasPiOS and Pi versions
 - `rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz`: Bullseye (v11.x) **64-bit**, Pi Zero 2W, Pi3 or Pi4
