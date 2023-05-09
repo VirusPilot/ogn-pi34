@@ -2,6 +2,9 @@
 - **ADS-L** (experimental) is supported
 - **SDR autogain** is enabled to avoid crossmodulation
 
+## please use these scripts with caution and ideally on a fresh 64bit RasPiOS Lite Image
+- if you intent to upgrade from an earlier OGN version, I suggest to save the current OGN config file and migrate its content to the `Template.conf` file when asked
+
 # ogn-pi34
 - script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
 - the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload
