@@ -3,7 +3,7 @@
 - **SDR autogain** is enabled to avoid crossmodulation
 
 ## please use these scripts with caution and ideally on a fresh 64bit RasPiOS Lite Image
-if you intent to upgrade an older OGN version, you just have to replace two binaries: `ogn-rf` and `rtlsdr-ogn`, here are the required steps (Bullseye 64-bit version as an example):
+if you intent to upgrade an older OGN version, you just have to replace two binaries: `ogn-rf` and `ogn-decode`, here are the required steps (Bullseye 64-bit version as an example):
 - `mkdir temp`
 - `tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz -C ./temp`
 - `cp ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
