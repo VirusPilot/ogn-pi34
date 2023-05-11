@@ -1,21 +1,10 @@
-### latest improvements:
-- **ADS-L** (experimental) is supported
-- **SDR autogain** is enabled to avoid crossmodulation
-
-## please use these scripts with caution and ideally on a fresh 64bit RasPiOS Lite Image
-if you intent to upgrade an older OGN version, you just have to replace two binaries: `ogn-rf` and `ogn-decode`, here are the required steps (Bullseye 64-bit version as an example):
-- `mkdir temp`
-- `tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz -C ./temp`
-- `cp ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
-- `sudo service rtlsdr-ogn restart`
-- `sudo service rtlsdr-ogn status` (to verify that the new version is running)
-
-# ogn-pi34
+# ogn-pi34 (ogn binary beta version 0.2.9 / Feb 14 2023)
 - script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
 - the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload
 - Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
-- latest 0.2.9 versions support the following protocols:
+- latest 0.2.9 version enables **SDR autogain** to avoid crossmodulation
+- latest 0.2.9 version support the following protocols:
   - FLARM
   - OGN
   - **SafeSky**
@@ -126,6 +115,14 @@ sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi3-gpu.sh
 ```
+
+## please use these scripts with caution and ideally on a fresh 64bit RasPiOS Lite Image
+if you intent to upgrade an older OGN version, you just have to replace two binaries: `ogn-rf` and `ogn-decode`, here are the required steps (Bullseye 64-bit version as an example):
+- `mkdir temp`
+- `tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz -C ./temp`
+- `cp ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
+- `sudo service rtlsdr-ogn restart`
+- `sudo service rtlsdr-ogn status` (to verify that the new version is running)
 
 ## post install modifications
 ### SDR ppm calibration (only required for non-TCXO SDRs)
