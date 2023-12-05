@@ -1,6 +1,6 @@
 # ogn-pi34 (ogn binary beta version 0.2.9 / Feb 14 2023)
 - script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
-- the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload
+- the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload (but only on 32bit and up to Rapsbian Buster platforms)
 - Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.2.9 version enables **SDR autogain** to avoid crossmodulation
