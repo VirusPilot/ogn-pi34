@@ -5,7 +5,7 @@ sudo apt install git build-essential libconfig9 libfftw3-bin libtool libusb-1.0-
 
 # install librtlsdr from source
 cd || exit
-git clone https://github.com/osmocom/rtl-sdr.git
+git clone https://github.com/VirusPilot/rtl-sdr.git
 cd rtl-sdr || exit
 mkdir build
 cd build || exit
