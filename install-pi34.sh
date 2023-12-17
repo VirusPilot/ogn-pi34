@@ -23,22 +23,32 @@ echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blac
 echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
 echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
 
-# unpack version 0.2.9
-ARCH=$(arch)
+# Bookworm: Debian 12 (32bit and 64bit)
+# Bullseye: Debian 11 (32bit and 64bit)
+# Buster:   Debian 10 (32bit)
+# Stretch:  Debian 9  (32bit)
+
+ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
-if [ "$ARCH" == aarch64 ] && [ "$DIST" == 11 ]; then
-  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz # Bullseye 64-bit
+if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
+  echo
+  echo "installing Bullseye 64bit version on" "$ARCH""bit" "Debian" "$DIST"
+  read -p "Press any key to continue"
+  echo
+  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz
 else
-  if [ "$ARCH" == armv7l ] && [ "$DIST" == 11 ]; then
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz # Bullseye 32-bit
+  if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 10 ]; then
+    echo
+    echo "installing Buster 32bit version on" "$ARCH""bit" "Debian" "$DIST"
+    read -p "Press any key to continue"
+    echo
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz
   else
-    if [ "$ARCH" == armv7l ] && [ "$DIST" == 10 ]; then
-      tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz # Buster 32-bit
-    else
-      if [ "$ARCH" == armv7l ]; then
-        tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz # Stretch 32-bit
-      fi
-    fi
+    echo
+    echo "installing Stretch 32bit version on" "$ARCH""bit" "Debian" "$DIST"
+    read -p "Press any key to continue"
+    echo
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz
   fi
 fi
 

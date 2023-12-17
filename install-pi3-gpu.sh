@@ -23,15 +23,18 @@ echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blac
 echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
 echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
 
-# unpack version 0.2.9 (only 32bit and up to Rapsbian Buster)
-ARCH=$(arch)
+ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
-if [ "$ARCH" == aarch64 ] || [ "$DIST" -gt 10 ]; then
+if [ "$ARCH" -eq 64 ] || [ "$DIST" -gt 10 ]; then
   echo
   echo "wrong platform for this script, exiting"
   echo
   exit
 else
+  echo
+  echo "installing Stretch 32bit version for Pi3 GPU on" "$ARCH""bit" "Debian" "$DIST"
+  read -p "Press any key to continue"
+  echo
   tar xvf ogn-pi34/rtlsdr-ogn-bin-RPI-GPU-0.2.9_raspbian_stretch.tgz
 fi
 
