@@ -83,13 +83,16 @@ APRS:
                                         # Please refer to http://wiki.glidernet.org/receiver-naming-convention
 };
 ```
-- in case you plan to combine the OGN station with a dump1090 feeder, the following addition is recommended:
+- you can monitor your OGN receiver by visiting https://yourstation:8080 and https://yourstation:8081
+- in case you plan to combine the OGN station with a dump1090 feeder, the following addition is necessary:
 ```
 HTTP:
 {
   Port = 8082;
 };
 ```
+- now you can monitor your OGN receiver by visiting https://yourstation:8082 and https://yourstation:8083
+- your dump1090 station can be monitored by visiting https://yourstation:8080
 ## automatic setup (standard script)
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
 - connect to your pi using ssh
