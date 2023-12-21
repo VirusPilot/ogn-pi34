@@ -7,7 +7,7 @@
 - latest 0.2.9 version support the following protocols:
   - FLARM
   - OGN
-  - **SafeSky**
+  - SafeSky
   - PilotAware
   - SPOT
   - Garmin InReach
@@ -50,13 +50,21 @@ RF:
 ```
 - SDR autogain target range (adding MinNoise and MaxNoise values):
 ```
-  OGN:
-  {
-    CenterFreq = 868.8;    # [MHz] with 868.8MHz and 2MHz bandwidth you can capture all systems: FLARM/OGN/FANET/PilotAware...
-    Gain       =  50.0;    # [dB]  this is the startup gain, will be automatically adjusted
-    MinNoise   =   2.0;    # default minimum allowed noise, you can ommit this parameter
-    MaxNoise   =   8.0;    # default maximum allowed noise, you can ommit this parameter
-  };
+OGN:
+{
+  CenterFreq = 868.8;    # [MHz] with 868.8MHz and 2MHz bandwidth you can capture all systems: FLARM/OGN/FANET/PilotAware...
+  Gain       =  50.0;    # [dB]  this is the startup gain, will be automatically adjusted
+  MinNoise   =   2.0;    # default minimum allowed noise, you can ommit this parameter
+  MaxNoise   =   8.0;    # default maximum allowed noise, you can ommit this parameter
+};
+```
+- **important:** in case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
+```
+GSM:                     # for frequency calibration based on GSM signals
+{
+  CenterFreq  =     0;   # [MHz] find the best GSM frequency with gsm_scan
+  Gain        =  30.0;   # [dB]  RF input gain (beware that GSM signals are very strong !)
+};
 ```
 - **important:** GPS coordinates and altitude for your OGN station:
 ```
@@ -82,22 +90,6 @@ HTTP:
   Port = 8082;
 };
 ```
-- in case you plan to feed OGN traffic to OpenSky, the following additional line in the "Demodulator" section is necessary:
-```
-Demodulator:
-{ 
-  MergeServer = "flarm-collector.opensky-network.org:20002";
-};
-```
-- in case you want to contribute with your OGN station to the Fast Radio Bursts (FRBs) project (https://arxiv.org/abs/1701.01475), you need to add the following:
-```
-FRB:
-{
-  DetectSNR = 10.0;
-  Server = "ogn3.glidernet.org:50000";
-};
-```
-
 ## automatic setup (standard script)
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
 - connect to your pi using ssh
