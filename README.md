@@ -115,7 +115,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 if you intent to upgrade an older OGN version, you just have to replace two binaries: `ogn-rf` and `ogn-decode`, here are the required steps (Bullseye 64-bit version as an example):
 - `mkdir temp`
 - `tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz -C ./temp`
-- `cp ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
+- `cp -f ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
 - `sudo service rtlsdr-ogn restart`
 - `sudo service rtlsdr-ogn status` (to verify that the new version is running)
 
