@@ -116,6 +116,9 @@ if you intent to upgrade an older OGN version, you just have to replace two bina
 - `mkdir temp`
 - `tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz -C ./temp`
 - `cp -f ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
+- `cd <your current rtlsdr-ogn folder>`
+- `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
+- `sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn`
 - `sudo service rtlsdr-ogn restart`
 - `sudo service rtlsdr-ogn status` (to verify that the new version is running)
 
