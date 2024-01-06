@@ -1,50 +1,43 @@
 #!/bin/bash
 #set -x
 
-sudo apt install git build-essential libconfig9 libfftw3-bin libtool libusb-1.0-0-dev lynx ntp ntpdate procserv telnet cmake -y
-
-# install librtlsdr from source
-cd || exit
-git clone https://github.com/VirusPilot/rtl-sdr.git
-cd rtl-sdr || exit
-mkdir build
-cd build || exit
-cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON
-make
-sudo make install
-sudo ldconfig
-cd || exit
-
-# prevent kernel modules claiming use of the USB DVB-T dongle
-echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist rtl2830 | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
-echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-glidernet-blacklist.conf
+sudo apt update
+sudo apt install libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
 
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
+
+# install librtlsdr
+if [ $ARCH -eq 64 ]; then
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_arm64.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_arm64.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_arm64.deb
+else
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_armhf.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_armhf.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_armhf.deb
+fi
+sudo dpkg -i *.deb
+rm -f *.deb
+
+# Bookworm: Debian 12 (32bit and 64bit)
+# Bullseye: Debian 11 (32bit and 64bit)
+# Buster:   Debian 10 (32bit)
+# Stretch:  Debian 9  (32bit)
+
+# prepare rtlsdr-ogn
 if [ "$ARCH" -eq 64 ] || [ "$DIST" -gt 10 ]; then
   echo
   echo "wrong platform for this script, exiting"
   echo
   exit
 else
-  echo
-  echo "installing Stretch 32bit version for Pi3 GPU on" "$ARCH""bit" "Debian" "$DIST"
-  read -p "Press any key to continue"
-  echo
   tar xvf ogn-pi34/rtlsdr-ogn-bin-RPI-GPU-0.2.9_raspbian_stretch.tgz
 fi
 
 cd rtlsdr-ogn || exit
-sudo chown root gsm_scan
-sudo chmod a+s gsm_scan
-sudo chown root ogn-rf
-sudo chmod a+s ogn-rf
-sudo chown root rtlsdr-ogn
-sudo chmod a+s rtlsdr-ogn
+sudo chown root gsm_scan ogn-rf ogn-rf-soapysdr rtlsdr-ogn
+sudo chmod a+s gsm_scan ogn-rf ogn-rf-soapysdr rtlsdr-ogn
 sudo mknod gpu_dev c 100 0
 
 echo
@@ -56,7 +49,7 @@ sudo nano Template.conf
 
 sudo wget http://download.glidernet.org/common/WW15MGH.DAC
 
-# install rtlsdr-ogn to run OGN receiver as a service
+# install rtlsdr-ogn service
 sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
 sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo update-rc.d rtlsdr-ogn defaults
