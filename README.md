@@ -107,8 +107,16 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ```
 sudo apt update
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
+git clone https://github.com/VirusPilot/ogn-pi34-gpu.git
 ./ogn-pi34/install-pi3-gpu.sh
+```
+
+## automatic setup (alternative script that installs dump1090-fa in addition)
+```
+sudo apt update
+sudo apt install git -y
+git clone https://github.com/VirusPilot/ogn-pi34-adsb.git
+./ogn-pi34/install-pi3-adsb.sh
 ```
 
 ## please use these scripts with caution and ideally on a fresh 64bit RasPiOS Lite Image
