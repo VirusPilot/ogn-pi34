@@ -107,7 +107,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ```
 sudo apt update
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34-gpu.git
+git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi3-gpu.sh
 ```
 
@@ -115,7 +115,7 @@ git clone https://github.com/VirusPilot/ogn-pi34-gpu.git
 ```
 sudo apt update
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34-adsb.git
+git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi3-adsb.sh
 ```
 
