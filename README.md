@@ -119,7 +119,7 @@ sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi3-gpu.sh
 ```
-^
+
 ## please use these scripts with caution and ideally on a fresh 64bit RasPiOS Lite Image
 if you intent to upgrade an older OGN version, you just have to replace two binaries: `ogn-rf` and `ogn-decode`, here are the required steps (Bullseye 64-bit version as an example):
 - `mkdir temp`
