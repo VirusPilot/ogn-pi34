@@ -104,7 +104,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ```
 
 ## automatic setup (alternative script that installs dump1090-fa in addition)
-- a modified version of dump1090-fa is used (max. 30dB gain, autogain enabled to favor nearby traffic, in preparation for an upcoming OGN binaries that will feed ADS-B traffic into Glidernet)
+- a modified version of dump1090-fa is used (max. 30dB gain, autogain enabled to favor nearby traffic, in preparation for the upcoming OGN binaries that will feed ADS-B traffic into Glidernet)
 ```
 sudo apt update
 sudo apt install git -y
