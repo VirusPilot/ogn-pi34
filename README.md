@@ -1,10 +1,12 @@
-# ogn-pi34 (ogn binary beta version 0.2.9 / Feb 14 2023)
+# ogn-pi34 install scripts
 - script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
-- the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload (but only on 32bit and up to Rapsbian Buster platforms)
+- the alternative script `install-pi34-adsb.sh` installs my dump1090-fa fork in addition (with **SDR autogain** enabled to prefer local traffic)
+- the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload (but only on 32bit platforms)
 - Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
-- latest 0.2.9 version enables **SDR autogain** to avoid crossmodulation
-- latest 0.2.9 version support the following protocols:
+- latest 0.3.0 version enables **SDR autogain** to avoid crossmodulation
+- latest 0.3.0 version support the following protocols:
+  - WIP: ADS-B (requires `dump1090-fa` runing on the same receiver)
   - FLARM
   - OGN
   - SafeSky
@@ -14,18 +16,13 @@
   - Skymaster
   - FANET (paragliders)
   - Spidertracks
-  - **ADS-L** (experimental)
+  - ADS-L
+  - ...
 
 ## supported RasPiOS and Pi versions
-- `rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz`: **64-bit** Debian 12,11,10 (bookworm, bullseye, buster), Pi Zero 2W, Pi3 or Pi4
-- `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz`: **32-bit** Debian 12,11,10 (bookworm, bullseye, buster), Pi Zero 2W, Pi3 or Pi4
-- `rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz`: **32-bit** Debian 9 (stretch), Pi Zero 2W or Pi3
-- `rtlsdr-ogn-bin-RPI-GPU-0.2.9_raspbian_stretch.tgz`: **32-bit** Debian 9,10 (buster, stretch), Pi3 (using GPU)
-
-## packages for x86 and x64 based thin-clients, please install them manually
-- `rtlsdr-ogn-bin-x64-0.2.9_debian_bullseye.tgz`
-- `rtlsdr-ogn-bin-x64-0.2.9_ubuntu_cosmic.tgz`
-- `rtlsdr-ogn-bin-x86-0.2.9_debian_buster.tgz`
+- **64-bit**: only Debian 12 Bookworm or newer on Pi Zero 2W, Pi3 or Pi4
+- **32-bit**: all RasPiOS versions on Pi Zero 2W, Pi3 or Pi4
+- **32-bit (RPI-GPU)**: all RasPiOS versions on Pi3 (using GPU)
 
 ## prepare script for Pi3B, Pi4B or Pi Zero 2W:
 - flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
@@ -39,6 +36,8 @@
 During the setup process you will be asked to edit (using nano) `Template.conf` for which you should have the following credentials at hand:
 - SDR device number (to avoid conflicts if you have multiple SDRs installed); alternatively if you know already the serial number of your SDR, you can use that to automatically select the appropriate SDR
 - SDR ppm calibration (only required for non-TCXO SDRs), this can also be measured and modified accordingly post install if unknown
+
+SDR selection and ppm correction:
 ```
 RF:
 {
@@ -48,7 +47,7 @@ RF:
                            # SDRs with TCXO: have near zero frequency correction and you can ommit this parameter
 };
 ```
-- SDR autogain target range (adding MinNoise and MaxNoise values):
+SDR autogain target range (adding MinNoise and MaxNoise values):
 ```
 OGN:
 {
@@ -58,7 +57,7 @@ OGN:
   MaxNoise   =   8.0;    # default maximum allowed noise, you can ommit this parameter
 };
 ```
-- **important:** in case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
+**important:** in case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
 ```
 GSM:                     # for frequency calibration based on GSM signals
 {
@@ -66,7 +65,9 @@ GSM:                     # for frequency calibration based on GSM signals
   Gain        =  30.0;   # [dB]  RF input gain (beware that GSM signals are very strong !)
 };
 ```
-- **important:** GPS coordinates and altitude for your OGN station:
+
+**important:** GPS coordinates and altitude for your OGN station:
+
 ```
 Position:
 { 
@@ -75,7 +76,8 @@ Position:
   Altitude   =        100; # [m]   Altitude above sea leavel
 };
 ```
-- APRS name (please remove the `#` in front of `Call` and change `SampleAPRSnameToChange` to your APRS callsign):
+
+APRS name (please remove the `#` in front of `Call` and change `SampleAPRSnameToChange` to your APRS callsign):
 ```
 APRS:
 {
@@ -83,16 +85,18 @@ APRS:
                                         # Please refer to http://wiki.glidernet.org/receiver-naming-convention
 };
 ```
-- you can monitor your OGN receiver by visiting https://yourstation:8080 and https://yourstation:8081
-- in case you plan to combine the OGN station with a dump1090-fa feeder (like in the alternative install script below), the following addition is necessary:
+you can monitor your OGN receiver by visiting https://yourstation:8080 and https://yourstation:8081
+
+in case you plan to combine the OGN station with a dump1090-fa feeder (like in the alternative install script below), the following addition is **necessary**:
 ```
 HTTP:
 {
   Port = 8082;
 };
 ```
-- now you can monitor your OGN receiver by visiting https://yourstation:8082 and https://yourstation:8083
-- your dump1090-fa station can be monitored by visiting https://yourstation:8080
+now you can monitor your OGN receiver by visiting https://yourstation:8082 and https://yourstation:8083
+your dump1090-fa station can be monitored by visiting https://yourstation:8080
+
 ## automatic setup (standard script)
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
 - connect to your pi using ssh
@@ -104,7 +108,6 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ```
 
 ## automatic setup (alternative script that installs dump1090-fa in addition)
-- a modified version of dump1090-fa is used (max. 30dB gain, autogain enabled to favor nearby traffic, in preparation for the upcoming OGN binaries that will feed ADS-B traffic into Glidernet)
 ```
 sudo apt update
 sudo apt install git -y
@@ -112,7 +115,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## automatic setup (alternative script with GPU code for Pi3, up to 32bit Rapsbian Buster)
+## automatic setup (alternative script with GPU code for Pi3, only on 32bit RasPiOS)
 ```
 sudo apt update
 sudo apt install git -y
@@ -121,9 +124,10 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ```
 
 ## steps to upgrade an older OGN version
-`ogn-rf` and `ogn-decode` need to be replaced, here are the required steps (Bullseye 64-bit version as an example):
+`ogn-rf` and `ogn-decode` need to be replaced, here are the required steps (Bookworm 64-bit version as an example):
 - `mkdir temp`
-- `tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz -C ./temp`
+- `wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.0.tgz`
+- `tar xvf rtlsdr-ogn-bin-arm64-0.3.0.tgz -C ./temp`
 - `cp -f ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
 - `cd <your current rtlsdr-ogn folder>`
 - `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
