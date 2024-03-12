@@ -42,8 +42,8 @@ else
 fi
 
 cd rtlsdr-ogn
-sudo chown root gsm_scan ogn-rf ogn-rf-soapysdr rtlsdr-ogn
-sudo chmod a+s gsm_scan ogn-rf ogn-rf-soapysdr rtlsdr-ogn
+sudo chown root gsm_scan ogn-rf rtlsdr-ogn
+sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn
 sudo mknod gpu_dev c 100 0
 
 echo
