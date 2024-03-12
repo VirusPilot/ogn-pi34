@@ -26,13 +26,14 @@ rm -f *.deb
 # Stretch:  Debian 9  (32bit)
 
 # prepare rtlsdr-ogn
-if [ "$ARCH" -eq 64 ] || [ "$DIST" -gt 10 ]; then
+if [ "$ARCH" -eq 64 ]; then
   echo
   echo "wrong platform for this script, exiting"
   echo
   exit
 else
-  tar xvf ogn-pi34/rtlsdr-ogn-bin-RPI-GPU-0.2.9_raspbian_stretch.tgz
+  wget http://download.glidernet.org/rpi-gpu/rtlsdr-ogn-bin-RPI-GPU-0.3.0.tgz
+  tar xvf *.tgz
 fi
 
 cd rtlsdr-ogn || exit

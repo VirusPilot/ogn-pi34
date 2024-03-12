@@ -26,13 +26,18 @@ rm -f *.deb
 # Stretch:  Debian 9  (32bit)
 
 # prepare rtlsdr-ogn
-if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
-  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.2.9_debian_bullseye.tgz
+if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 12 ]; then
+  wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.0.tgz
+  tar xvf *.tgz
 else
-  if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 10 ]; then
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_buster.tgz
+  if [ "$ARCH" -eq 32 ]; then
+    wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.0.tgz
+    tar xvf *.tgz
   else
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.2.9_raspbian_stretch.tgz
+    echo
+    echo "wrong platform for this script, exiting"
+    echo
+    exit
   fi
 fi
 
