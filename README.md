@@ -22,7 +22,7 @@
 ## supported RasPiOS and Pi versions
 - **64-bit**: only Debian 12 Bookworm or newer on Pi Zero 2W, Pi3 or Pi4
 - **32-bit**: all RasPiOS versions on Pi Zero 2W, Pi3 or Pi4
-- **32-bit (RPI-GPU)**: all RasPiOS versions on Pi3 (using GPU)
+- **32-bit (RPI-GPU)**: RasPiOS up to Buster on Pi3 (using GPU)
 
 ## prepare script for Pi3B, Pi4B or Pi Zero 2W:
 - flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
@@ -115,7 +115,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## automatic setup (alternative script with GPU code for Pi3, only on 32bit RasPiOS)
+## automatic setup (alternative script with GPU code for Pi3, only on 32bit RasPiOS up to Buster)
 ```
 sudo apt update
 sudo apt install git -y
