@@ -19,6 +19,12 @@ else
 fi
 sudo dpkg -i *.deb
 rm -f *.deb
+echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
+echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
+echo blacklist rtl2830 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
+echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
+echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
+echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 
 # Bookworm: Debian 12 (32bit and 64bit)
 # Bullseye: Debian 11 (32bit and 64bit)
