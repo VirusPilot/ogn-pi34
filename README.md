@@ -109,7 +109,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 sudo apt update
 sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
-./ogn-pi34/install-pi3-adsb.sh
+./ogn-pi34/install-pi34-adsb.sh
 ```
 
 ## automatic setup (alternative script with GPU code for Pi3, up to 32bit Rapsbian Buster)
