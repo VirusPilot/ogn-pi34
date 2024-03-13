@@ -41,61 +41,65 @@ SDR selection and ppm correction:
 ```
 RF:
 {
-  Device   = 0;            # SDR selection by device index, can be verified with "sudo rtl_eeprom -d 0" or "-d 1", ...
-  #DeviceSerial = "868";   # SDR selection by serial number (as an alternative)
-  FreqCorr = 0;            # [ppm] "big" R820T sticks have 40-80ppm correction factors, measure it with gsm_scan
-                           # SDRs with TCXO: have near zero frequency correction and you can ommit this parameter
+  Device   = 0;            # device selection based on SDR index number, please check using "rtl_test"
+  #DeviceSerial = "868";   # alternative device selection based on SDR serial number (SN), please check using "rtl_test"
+  FreqCorr = 0;            # [ppm] SDR correction factor, newer sticks have a TCXO so no correction required
+  SampleRate = 2.0;        # [MHz] 1.0 or 2.0MHz, 2MHz is required to captue PilotAware
+  BiasTee  = 0;            # just a safeguard
 };
 ```
 SDR autogain target range (adding MinNoise and MaxNoise values):
 ```
 OGN:
 {
-  CenterFreq = 868.8;    # [MHz] with 868.8MHz and 2MHz bandwidth you can capture all systems: FLARM/OGN/FANET/PilotAware...
-  Gain       =  50.0;    # [dB]  this is the startup gain, will be automatically adjusted
+  CenterFreq = 868.8;    # [MHz] 868.8MHz is required to captue all systems: FLARM/OGN/FANET/ADS-L/PilotAware
+  Gain       =  50.0;    # [dB]  this is the startup gain, it will be automatically adjusted (AGC)
   MinNoise   =   2.0;    # default minimum allowed noise, you can ommit this parameter
   MaxNoise   =   8.0;    # default maximum allowed noise, you can ommit this parameter
 };
-```
-**important:** in case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
+```**important:** in case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
 ```
 GSM:                     # for frequency calibration based on GSM signals
-{
-  CenterFreq  =     0;   # [MHz] find the best GSM frequency with gsm_scan
-  Gain        =  30.0;   # [dB]  RF input gain (beware that GSM signals are very strong !)
-};
+{                        # you can ommit the whole GSM section for sticks with TCXO
+  CenterFreq  =    0;    # [MHz] you may enter the GSM frequency that you found with gsm_scan but ONLY if you have GSM stations nearby
+  Gain        = 25.0;    # [dB]  RF input gain (beware that GSM signals are very strong)
+  };
 ```
-
 **important:** GPS coordinates and altitude for your OGN station:
-
 ```
 Position:
 { 
-  Latitude   =   +48.0000; # [deg] Antenna coordinates
-  Longitude  =    +9.0000; # [deg]
-  Altitude   =        100; # [m]   Altitude above sea leavel
+  Latitude   =   +48.0000; # [deg] please put in the appropriate latitude for your OGN station antenna
+  Longitude  =   +10.0000; # [deg] please put in the appropriate longitude for your OGN station antenna
+  Altitude   =        500; # [m]   altitude AMSL, please put in the appropriate altitude for your OGN station antenna
 };
 ```
-
+required configuration for feeding Open Glider Network with ADS-B traffic
+```
+ADSB:                      # feeding Open Glider Network with ADS-B traffic
+{
+  AVR = "localhost:30002"; # disable this line if you DO NOT WANT to feed Open Glider Network with ADS-B traffic
+  MaxAlt = 18000;          # [ft] default maximum altitude, feel free to increase but this will potentially increase your internet traffic
+};
+```
 APRS name (please remove the `#` in front of `Call` and change `SampleAPRSnameToChange` to your APRS callsign):
 ```
 APRS:
 {
-  Call = "SampleAPRSnameToChange";      # APRS callsign (max. 9 characters)
-                                        # Please refer to http://wiki.glidernet.org/receiver-naming-convention
+  Call = "station";            # replace <station> with your actual APRS callsign, e.g. your local airport ICAO code (max. 9 characters)
+                               # please refer to http://wiki.glidernet.org/receiver-naming-convention
+  #Server = "localhost:14580"; # enable this line if you DO NOT WANT to feed Open Glider Network
 };
 ```
 you can monitor your OGN receiver by visiting https://yourstation:8080 and https://yourstation:8081
 
 in case you plan to combine the OGN station with a dump1090-fa feeder (like in the alternative install script below), the following addition is **necessary**:
 ```
-HTTP:
-{
-  Port = 8082;
-};
+HTTP:           # this section is required to be able to monitor the different status pages of your receiver
+{               # e.g. http://raspberrypi:8080 for monitoring all traffic consolidated on a single map
+  Port = 8082;  # e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
+};              # e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
 ```
-now you can monitor your OGN receiver by visiting https://yourstation:8082 and https://yourstation:8083
-your dump1090-fa station can be monitored by visiting https://yourstation:8080
 
 ## automatic setup (standard script)
 - plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
