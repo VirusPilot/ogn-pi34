@@ -36,7 +36,7 @@ else
   echo
   exit
 fi
-cp -f Template.conf rtlsdr-ogn/Template.conf
+cp -f ogn-pi34/Template.conf rtlsdr-ogn/Template.conf
 cd rtlsdr-ogn
 sudo chown root gsm_scan ogn-rf rtlsdr-ogn
 sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn
