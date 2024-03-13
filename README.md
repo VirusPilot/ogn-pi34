@@ -75,11 +75,12 @@ ADSB:                      # feeding Open Glider Network with ADS-B traffic
   MaxAlt = 18000;          # [ft] default maximum altitude, feel free to increase but this will potentially increase your internet traffic
 };
 ```
-Replace <station> with your actual APRS callsign, please refer to http://wiki.glidernet.org/receiver-naming-convention:
+Replace <NewOGNrx> with your actual APRS callsign, please refer to http://wiki.glidernet.org/receiver-naming-convention:
 ```
 APRS:
 {
-    Call = "station"; # replace <station> with your actual APRS callsign, e.g. your local airport ICAO code (max. 9 characters)
+  #Call = "NewOGNrx";          # enable this line and replace <NewOGNrx> with your actual APRS callsign, e.g. your local airport ICAO code (max. 9 characters)
+                               # please refer to http://wiki.glidernet.org/receiver-naming-convention
 };
 ```
 In case you plan to combine the OGN station with a dump1090-fa feeder (like in the alternative install script below), the following section is required:
