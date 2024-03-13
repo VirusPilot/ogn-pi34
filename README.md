@@ -1,6 +1,6 @@
 # ogn-pi34 install scripts
 - script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
-- the alternative script `install-pi34-adsb.sh` installs my dump1090-fa fork in addition (with **SDR autogain** enabled to prefer local traffic)
+- the alternative script `install-pi34-adsb.sh` installs my dump1090-fa fork in addition (with **SDR autogain** enabled to prefer local traffic) to feed Open Glider Network with ADS-B
 - the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload (but only on 32bit platforms)
 - Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
@@ -32,40 +32,33 @@
   - configure WiFi (particularly important for Pi Zero 2W)
 - boot and wait until your Pi is connected to your LAN or WiFi
 
-## preparation of OGN credentials
-During the setup process you will be asked to edit (using nano) `Template.conf` for which you should have the following credentials at hand:
-- SDR device number (to avoid conflicts if you have multiple SDRs installed); alternatively if you know already the serial number of your SDR, you can use that to automatically select the appropriate SDR
+## preparation of credentials
+During the setup process you will be automatically asked to edit `Template.conf` and potentially `dump1090-fa` for which you should have the following credentials at hand:
+- SDR index numbers or SDR serial numbers (SN) for both the OGN and ADS-B SDRs
 - SDR ppm calibration (only required for non-TCXO SDRs), this can also be measured and modified accordingly post install if unknown
+- OGN station name, e.g. your local airport ICAO code (max. 9 characters), please refer to http://wiki.glidernet.org/receiver-naming-convention
+- station coordinates and altitude for both the OGN and ADS-B configuration file
 
 SDR selection and ppm correction:
 ```
 RF:
 {
-  Device   = 0;            # device selection based on SDR index number, please check using "rtl_test"
-  #DeviceSerial = "868";   # alternative device selection based on SDR serial number (SN), please check using "rtl_test"
+  Device   = 0;            # device selection based on SDR index number, please doublecheck post-install using "rtl_test"
+  #DeviceSerial = "868";   # alternative device selection based on SDR serial number (SN), please doublecheck post-install using "rtl_test"
   FreqCorr = 0;            # [ppm] SDR correction factor, newer sticks have a TCXO so no correction required
   SampleRate = 2.0;        # [MHz] 1.0 or 2.0MHz, 2MHz is required to captue PilotAware
   BiasTee  = 0;            # just a safeguard
 };
 ```
-SDR autogain target range (adding MinNoise and MaxNoise values):
+In case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
 ```
-OGN:
-{
-  CenterFreq = 868.8;    # [MHz] 868.8MHz is required to captue all systems: FLARM/OGN/FANET/ADS-L/PilotAware
-  Gain       =  50.0;    # [dB]  this is the startup gain, it will be automatically adjusted (AGC)
-  MinNoise   =   2.0;    # default minimum allowed noise, you can ommit this parameter
-  MaxNoise   =   8.0;    # default maximum allowed noise, you can ommit this parameter
+GSM:                  # for frequency calibration based on GSM signals
+{                     # you can ommit the whole GSM section for sticks with TCXO
+  CenterFreq  =    0; # [MHz] you may enter the GSM frequency that you found with gsm_scan but ONLY if you have GSM stations nearby
+  Gain        = 25.0; # [dB]  RF input gain (beware that GSM signals are very strong)
 };
-```**important:** in case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
 ```
-GSM:                     # for frequency calibration based on GSM signals
-{                        # you can ommit the whole GSM section for sticks with TCXO
-  CenterFreq  =    0;    # [MHz] you may enter the GSM frequency that you found with gsm_scan but ONLY if you have GSM stations nearby
-  Gain        = 25.0;    # [dB]  RF input gain (beware that GSM signals are very strong)
-  };
-```
-**important:** GPS coordinates and altitude for your OGN station:
+GPS coordinates and altitude for your OGN station:
 ```
 Position:
 { 
@@ -74,7 +67,7 @@ Position:
   Altitude   =        500; # [m]   altitude AMSL, please put in the appropriate altitude for your OGN station antenna
 };
 ```
-required configuration for feeding Open Glider Network with ADS-B traffic
+Required configuration for feeding Open Glider Network with ADS-B traffic:
 ```
 ADSB:                      # feeding Open Glider Network with ADS-B traffic
 {
@@ -82,18 +75,14 @@ ADSB:                      # feeding Open Glider Network with ADS-B traffic
   MaxAlt = 18000;          # [ft] default maximum altitude, feel free to increase but this will potentially increase your internet traffic
 };
 ```
-APRS name (please remove the `#` in front of `Call` and change `SampleAPRSnameToChange` to your APRS callsign):
+Replace <station> with your actual APRS callsign, please refer to http://wiki.glidernet.org/receiver-naming-convention:
 ```
 APRS:
 {
-  Call = "station";            # replace <station> with your actual APRS callsign, e.g. your local airport ICAO code (max. 9 characters)
-                               # please refer to http://wiki.glidernet.org/receiver-naming-convention
-  #Server = "localhost:14580"; # enable this line if you DO NOT WANT to feed Open Glider Network
+    Call = "station"; # replace <station> with your actual APRS callsign, e.g. your local airport ICAO code (max. 9 characters)
 };
 ```
-you can monitor your OGN receiver by visiting https://yourstation:8080 and https://yourstation:8081
-
-in case you plan to combine the OGN station with a dump1090-fa feeder (like in the alternative install script below), the following addition is **necessary**:
+In case you plan to combine the OGN station with a dump1090-fa feeder (like in the alternative install script below), the following section is required:
 ```
 HTTP:           # this section is required to be able to monitor the different status pages of your receiver
 {               # e.g. http://raspberrypi:8080 for monitoring all traffic consolidated on a single map
@@ -127,11 +116,11 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi3-gpu.sh
 ```
 
-## steps to upgrade an older OGN version
-`ogn-rf` and `ogn-decode` need to be replaced, here are the required steps (Bookworm 64-bit version as an example):
+## steps to upgrade a 32bit RasPiOS Bullseye receiver
+`ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
-- `wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.0.tgz`
-- `tar xvf rtlsdr-ogn-bin-arm64-0.3.0.tgz -C ./temp`
+- `wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-ARM-0.3.0.tgz`
+- `tar xvf rtlsdr-ogn-bin-ARM-0.3.0.tgz -C ./temp`
 - `cp -f ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
 - `cd <your current rtlsdr-ogn folder>`
 - `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
