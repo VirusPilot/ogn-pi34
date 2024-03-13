@@ -1,5 +1,5 @@
 # ogn-pi34 install scripts
-- script `install-pi34.sh` to built an OGN station to feed the **Open Glider Network:** https://wiki.glidernet.org
+- script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
 - the alternative script `install-pi34-adsb.sh` installs my dump1090-fa fork in addition (with **SDR autogain** enabled to prefer local traffic) to feed Open Glider Network with ADS-B
 - the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload (but only on 32bit platforms)
 - Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
