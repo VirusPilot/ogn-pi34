@@ -19,17 +19,21 @@
   - ADS-L
   - ...
 
-## supported RasPiOS and Pi versions
+## supported RasPiOS and Pi versions (from http://download.glidernet.org)
 - **64-bit**: Debian 12 Bookworm or newer on Pi Zero 2W, Pi3 or Pi4
 - **32-bit**: Debian 11 Bullseye or newer on Pi Zero 2W, Pi3 or Pi4
 - **32-bit (RPI-GPU)**: Debian 9 Stretch and Debian 10 Buster on Pi3 (using GPU)
 
-## packages for legacy platforms
+## packages for legacy platforms (from Pawel)
 - https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.0_Jessie.tgz
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.0_Stretch.tgz
 - https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.0_Jessie.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-arm64-0.3.0_Bullseye.tgz
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.0_Stretch.tgz
 - https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.0_Buster.tgz
-
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-arm64-0.3.0_Bullseye.tgz
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-x86-0.3.0_Buster.tgz
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-x64-0.3.0_Bullseye.tgz
+ 
 ## prepare script for Pi3B, Pi4B or Pi Zero 2W:
 - flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
   - select appropriate hostname
