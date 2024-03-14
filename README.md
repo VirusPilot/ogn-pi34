@@ -1,10 +1,12 @@
 # ogn-pi34 install scripts
-- script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
-- the alternative script `install-pi34-adsb.sh` installs my dump1090-fa fork in addition (with **SDR autogain** enabled to prefer local traffic) to feed Open Glider Network with ADS-B
+- standard script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
+- alternative script `install-pi34-adsb.sh` installs https://github.com/VirusPilot/dump1090 in addition to feed **Open Glider Network** with ADS-B
+  -  max. ADS-B SDR gain = 30dB (to prefer local traffic)
+  -  adaptive gain and adaptive burst mode enabled (to prefer local traffic)
 - Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.3.0 version enables **SDR autogain** to avoid crossmodulation
-- latest 0.3.0 version support the following protocols:
+- latest 0.3.0 version supports the following protocols:
   - ADS-B (requires `dump1090-fa` runing on the same receiver)
   - FLARM
   - OGN
@@ -110,6 +112,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ```
 
 ## automatic setup (alternative script that installs dump1090-fa in addition)
+- based on https://github.com/VirusPilot/dump1090
 ```
 sudo apt update
 sudo apt install git -y
