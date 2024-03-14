@@ -120,11 +120,11 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## steps to upgrade e.g. a 32bit RasPiOS Bullseye v0.2.8 receiver
+## steps to manually upgrade legacy platforms (e.g. a 32bit RasPiOS Buster v0.2.8 receiver)
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
-- `wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-ARM-0.3.0.tgz`
-- `tar xvf rtlsdr-ogn-bin-ARM-0.3.0.tgz -C ./temp`
+- `git clone https://github.com/VirusPilot/ogn-pi34`
+- `tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.0_Buster.tgz`
 - `cp -f ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
 - `cd <your current rtlsdr-ogn folder>`
 - `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
