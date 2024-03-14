@@ -123,10 +123,19 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ## steps to manually upgrade legacy platforms (e.g. a 32bit RasPiOS Buster v0.2.8 receiver)
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
+- `cd temp`
 - `git clone https://github.com/VirusPilot/ogn-pi34`
 - `tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.0_Buster.tgz`
-- `cp -f ./temp/rtlsdr-ogn/ogn-* <your current rtlsdr-ogn folder>`
-- `cd <your current rtlsdr-ogn folder>`
+- `cp -f rtlsdr-ogn/ogn-* <your_current_rtlsdr-ogn_folder>`
+- if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
+  ```
+  ADSB:
+  {
+    AVR = "localhost:30002";
+    MaxAlt = 18000;
+  };
+  ```
+- `cd <your_current_rtlsdr-ogn_folder>`
 - `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
 - `sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn`
 - `sudo service rtlsdr-ogn restart`
