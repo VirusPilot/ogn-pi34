@@ -1,12 +1,11 @@
 # ogn-pi34 install scripts
 - script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
 - the alternative script `install-pi34-adsb.sh` installs my dump1090-fa fork in addition (with **SDR autogain** enabled to prefer local traffic) to feed Open Glider Network with ADS-B
-- the alternative script `install-pi3-gpu.sh` makes use of the GPU on the Pi3 to reduce CPU workload (but only on 32bit platforms)
 - Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.3.0 version enables **SDR autogain** to avoid crossmodulation
 - latest 0.3.0 version support the following protocols:
-  - WIP: ADS-B (requires `dump1090-fa` runing on the same receiver)
+  - ADS-B (requires `dump1090-fa` runing on the same receiver)
   - FLARM
   - OGN
   - SafeSky
@@ -22,7 +21,6 @@
 ## supported RasPiOS and Pi versions (from http://download.glidernet.org)
 - **64-bit**: Debian 12 Bookworm or newer on Pi Zero 2W, Pi3 or Pi4
 - **32-bit**: Debian 11 Bullseye or newer on Pi Zero 2W, Pi3 or Pi4
-- **32-bit (RPI-GPU)**: Debian 9 Stretch and Debian 10 Buster on Pi3 (using GPU)
 
 ## packages for legacy platforms (from Pawel)
 - https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.0_Jessie.tgz
@@ -119,15 +117,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## automatic setup (alternative script with GPU code for Pi3, only on 32bit RasPiOS up to Buster)
-```
-sudo apt update
-sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
-./ogn-pi34/install-pi3-gpu.sh
-```
-
-## steps to upgrade a 32bit RasPiOS Bullseye receiver
+## steps to upgrade e.g. a 32bit RasPiOS Bullseye v0.2.8 receiver
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
 - `wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-ARM-0.3.0.tgz`
