@@ -3,7 +3,7 @@
 - alternative script `install-pi34-adsb.sh` installs https://github.com/VirusPilot/dump1090 in addition to feed **Open Glider Network** with ADS-B
   -  max. ADS-B SDR gain = 30dB (to prefer local traffic)
   -  adaptive gain and adaptive burst mode enabled (to prefer local traffic)
-- Pi Zero 2W, Pi3 or Pi4 with **RasPiOS Lite** (32bit or 64bit) are supported
+- Pi Zero 2W, Pi3, Pi4 or Pi5 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.3.0 version enables **SDR autogain** to avoid crossmodulation
 - latest 0.3.0 version supports the following protocols:
@@ -21,8 +21,8 @@
   - ...
 
 ## supported RasPiOS and Pi versions (from http://download.glidernet.org)
-- **64-bit**: Debian 12 Bookworm or newer on Pi Zero 2W, Pi3 or Pi4
-- **32-bit**: Debian 11 Bullseye or newer on Pi Zero 2W, Pi3 or Pi4
+- **64-bit**: Debian 12 Bookworm or newer on Pi Zero 2W, Pi3, Pi4 or Pi5
+- **32-bit**: Debian 11 Bullseye or newer on Pi Zero 2W, Pi3, Pi4 or Pi5
 
 ## packages for legacy platforms (from Pawel)
 - https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.0_Jessie.tgz
@@ -34,7 +34,7 @@
 - https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-x86-0.3.0_Buster.tgz
 - https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-x64-0.3.0_Bullseye.tgz
  
-## prepare script for Pi3B, Pi4B or Pi Zero 2W:
+## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
 - flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
   - select appropriate hostname
   - enable ssh
@@ -102,7 +102,7 @@ HTTP:           # this section is required to be able to monitor the different s
 ```
 
 ## automatic setup (standard script)
-- plug your SD card into the Pi, connect your Pi3 or Pi4 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
+- plug your SD card into the Pi, connect your Pi3, Pi4 or Pi5 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
 - connect to your pi using ssh
 ```
 sudo apt update
