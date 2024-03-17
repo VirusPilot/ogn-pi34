@@ -1,4 +1,4 @@
-# ogn-pi34 install scripts
+# ogn-pi34 install scripts (only for Bullseye and Bookworm)
 - standard script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
 - alternative script `install-pi34-adsb.sh` installs https://github.com/VirusPilot/dump1090 in addition to feed **Open Glider Network** with ADS-B
   -  max. ADS-B SDR gain = 30dB (to prefer local traffic)
@@ -20,20 +20,16 @@
   - ADS-L
   - ...
 
-## supported RasPiOS and Pi versions (from http://download.glidernet.org)
-- **64-bit**: Debian 12 Bookworm or newer on Pi Zero 2W, Pi3, Pi4 or Pi5
-- **32-bit**: Debian 11 Bullseye or newer on Pi Zero 2W, Pi3, Pi4 or Pi5
+## packages (version 0.3.1)
+### ARM (32bit):
+- ...
+### ARM (64bit):
+- ...
+### RPI-GPU (only on Pi3):
+- ...
+### PC platforms:
+- ...
 
-## packages for legacy platforms (from Pawel)
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.0_Jessie.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.0_Stretch.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.0_Jessie.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.0_Stretch.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.0_Buster.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-arm64-0.3.0_Bullseye.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-x86-0.3.0_Buster.tgz
-- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-x64-0.3.0_Bullseye.tgz
- 
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
 - flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
   - select appropriate hostname
@@ -125,7 +121,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 - `mkdir temp`
 - `cd temp`
 - `git clone https://github.com/VirusPilot/ogn-pi34`
-- `tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.0_Buster.tgz`
+- `tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz`
 - `cp -f rtlsdr-ogn/ogn-* <your_current_rtlsdr-ogn_folder>`
 - if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
   ```
