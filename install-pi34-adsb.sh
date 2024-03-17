@@ -27,16 +27,14 @@ echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 
 # prepare rtlsdr-ogn
-if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 12 ]; then
-  wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.0.tgz
-  tar xvf *.tgz
+if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
+  tar xvf rtlsdr-ogn-bin-arm64-0.3.1_Bullseye.tgz
 else
-  if [ "$ARCH" -eq 32 ]; then
-    wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.0.tgz
-    tar xvf *.tgz
+  if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 11 ]; then
+    tar xvf rtlsdr-ogn-bin-ARM-0.3.1_Bullseye.tgz
   else
     echo
-    echo "wrong platform for this script, exiting"
+    echo "this script is for Bullseye and Bookworm only, exiting"
     echo
     exit
   fi
