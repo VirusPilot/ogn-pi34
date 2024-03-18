@@ -22,11 +22,13 @@
 
 ## packages (version 0.3.1)
 ### ARM (32bit):
-- ...
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.1_Stretch.tgz
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz
 ### ARM (64bit):
-- ...
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-arm64-0.3.1_Bullseye.tgz
 ### RPI-GPU (only on Pi3):
-- ...
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.1_Stretch.tgz
+- https://github.com/VirusPilot/ogn-pi34/blob/master/rtlsdr-ogn-bin-RPI-GPU-0.3.1_Buster.tgz
 ### PC platforms:
 - ...
 
