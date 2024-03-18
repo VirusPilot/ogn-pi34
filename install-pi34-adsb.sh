@@ -30,11 +30,11 @@ echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
   tar xvf rtlsdr-ogn-bin-arm64-0.3.1_Bullseye.tgz
 else
-  if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 11 ]; then
-    tar xvf rtlsdr-ogn-bin-ARM-0.3.1_Bullseye.tgz
+  if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 10 ]; then
+    tar xvf rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz
   else
     echo
-    echo "this script is for Bullseye and Bookworm only, exiting"
+    echo "wrong platform for this script, exiting"
     echo
     exit
   fi
