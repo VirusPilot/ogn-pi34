@@ -1,3 +1,5 @@
+## please note: ADSB traffic forward is temporarily disabled, will be enabled shortly
+
 # ogn-pi34 install scripts
 - standard script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
 - alternative script `install-pi34-adsb.sh` installs https://github.com/VirusPilot/dump1090 in addition to feed **Open Glider Network** with ADS-B
@@ -5,8 +7,8 @@
   -  adaptive gain and adaptive burst mode enabled (to prefer local traffic)
 - Pi Zero 2W, Pi3, Pi4 or Pi5 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
-- latest 0.3.0 version enables **SDR autogain** to avoid crossmodulation
-- latest 0.3.0 version supports the following protocols:
+- latest 0.3.1 version enables **SDR autogain** to avoid crossmodulation
+- latest 0.3.1 version supports the following protocols:
   - ADS-B (requires `dump1090-fa` runing on the same receiver)
   - FLARM
   - OGN
