@@ -1,4 +1,4 @@
-# ogn-pi34 install scripts (only for Bullseye and Bookworm)
+# ogn-pi34 install scripts
 - standard script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
 - alternative script `install-pi34-adsb.sh` installs https://github.com/VirusPilot/dump1090 in addition to feed **Open Glider Network** with ADS-B
   -  max. ADS-B SDR gain = 30dB (to prefer local traffic)
