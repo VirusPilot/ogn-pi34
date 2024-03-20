@@ -28,10 +28,10 @@ echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 
 # prepare rtlsdr-ogn
 if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
-  tar xvf rtlsdr-ogn-bin-arm64-0.3.1_Bullseye.tgz
+  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.1_Bullseye.tgz
 else
   if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 10 ]; then
-    tar xvf rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz
   else
     echo
     echo "wrong platform for this script, exiting"
