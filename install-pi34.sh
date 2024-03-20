@@ -27,11 +27,11 @@ echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 
 # prepare rtlsdr-ogn
-if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
-  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.1_Bullseye.tgz
+if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 12 ]; then
+  wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.2.tgz
 else
-  if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 10 ]; then
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz
+  if [ "$ARCH" -eq 32 ] && [ "$DIST" -ge 11 ]; then
+    wget wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz
   else
     echo
     echo "wrong platform for this script, exiting"
@@ -39,6 +39,7 @@ else
     exit
   fi
 fi
+tar xvf *.tgz
 cp -f ogn-pi34/Template.conf rtlsdr-ogn/Template.conf
 cd rtlsdr-ogn
 sudo chown root gsm_scan ogn-rf rtlsdr-ogn
