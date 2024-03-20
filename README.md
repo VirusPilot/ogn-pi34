@@ -1,5 +1,10 @@
-# ogn-pi34 install scripts
-- standard script `install-pi34.sh` to built a receiver station to feed the **Open Glider Network:** https://wiki.glidernet.org
+# scripts to built a receiver station to feed the Open Glider Network
+## supported platforms by these scripts:
+- Bookworm (Debian 12): 64bit and 32bit
+- Bullseye (Debian 11): 32bit
+- for older RasPiOS versions please consider a manual update as described below
+## details about the scripts
+- standard script `install-pi34.sh` 
 - alternative script `install-pi34-adsb.sh` installs https://github.com/VirusPilot/dump1090 in addition to feed **Open Glider Network** with ADS-B
   -  max. ADS-B SDR gain = 30dB (to prefer local traffic)
   -  adaptive gain and adaptive burst mode enabled (to prefer local traffic)
