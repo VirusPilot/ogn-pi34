@@ -5,8 +5,8 @@
   -  adaptive gain and adaptive burst mode enabled (to prefer local traffic)
 - Pi Zero 2W, Pi3, Pi4 or Pi5 with **RasPiOS Lite** (32bit or 64bit) are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
-- latest 0.3.1 version enables **SDR autogain** to avoid crossmodulation
-- latest 0.3.1 version supports the following protocols:
+- latest 0.3.2 version enables **SDR autogain** to avoid crossmodulation
+- latest 0.3.2 version supports the following protocols:
   - ADS-B (requires `dump1090-fa` runing on the same receiver)
   - FLARM
   - OGN
@@ -20,20 +20,8 @@
   - ADS-L
   - ...
 
-## packages (version 0.3.1)
-### ARM (32bit):
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.1_Stretch.tgz
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz
-### ARM (64bit):
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.1_Bullseye.tgz
-### RPI-GPU (only on Pi3 and 32bit RasPiOS up to Buster):
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.1_Stretch.tgz
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.1_Buster.tgz
-### PC platforms:
-- ...
-
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
-- flash latest **RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
+- flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
   - select appropriate hostname
   - enable ssh
   - enable user pi with password
@@ -118,12 +106,12 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## steps to manually upgrade legacy platforms (e.g. a 32bit RasPiOS Buster v0.2.8 receiver)
+## steps to manually upgrade legacy platforms (e.g. a 32bit RasPiOS Buster receiver)
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
 - `cd temp`
-- `git clone https://github.com/VirusPilot/ogn-pi34`
-- `tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.1_Buster.tgz`
+- `wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz`
+- `tar xvf *.tgz`
 - `cp -f rtlsdr-ogn/ogn-* <your_current_rtlsdr-ogn_folder>`
 - if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
   ```
