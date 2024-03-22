@@ -9,7 +9,7 @@
   -  installs https://github.com/VirusPilot/dump1090 in addition to feed Open Glider Network with ADS-B
   -  max. ADS-B SDR gain = 30dB (to prefer local traffic)
   -  adaptive gain and adaptive burst mode enabled (to prefer local traffic)
-- Pi Zero 2W, Pi3, Pi4 or Pi5 with **RasPiOS Lite** (32bit or 64bit) are supported
+- Pi Zero 2W, Pi3, Pi4 or Pi5 are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.3.2 version enables **SDR autogain** to avoid crossmodulation
 - latest 0.3.2 version supports the following protocols:
