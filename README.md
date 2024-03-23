@@ -26,6 +26,9 @@
   - ADS-L
   - ...
 
+## packages for manual update of legacy platforms
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz
+
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
 - flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
   - select appropriate hostname
@@ -112,11 +115,11 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## steps to manually upgrade legacy platforms (e.g. a 32bit RasPiOS Buster receiver)
+## steps to manually upgrade legacy platforms (e.g. a 64bit RasPiOS Bullseye receiver)
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
 - `cd temp`
-- `wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz`
+- `wget https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz`
 - `tar xvf *.tgz`
 - `cp -f rtlsdr-ogn/ogn-* <your_current_rtlsdr-ogn_folder>`
 - if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
@@ -130,7 +133,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 - `cd <your_current_rtlsdr-ogn_folder>`
 - `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
 - `sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn`
-- `sudo service rtlsdr-ogn restart`
+- `sudo service rtlsdr-ogn restart` or `sudo reboot`
 - `sudo service rtlsdr-ogn status` (to verify that the new version is running)
 
 ## post install modifications
