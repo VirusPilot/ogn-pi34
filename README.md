@@ -28,6 +28,7 @@
 
 ## packages for manual update of legacy platforms
 - https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-x86-0.3.2_Buster.tgz
 
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
 - flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
