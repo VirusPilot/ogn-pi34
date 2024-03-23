@@ -28,6 +28,10 @@
 
 ## packages for manual update of legacy platforms
 - https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie.tgz
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie_JPEG.tgz
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie.tgz
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie_JPEG.tgz
 - https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-x86-0.3.2_Buster.tgz
 
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
