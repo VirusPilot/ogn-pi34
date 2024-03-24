@@ -124,9 +124,10 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
 - `cd temp`
+- find out whether you are running 32bit or 64bit with `getconf LONG_BIT`
 - to update a 64bit RasPiOS Bullseye receiver:
   - `wget https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz`
-- to update a 32bit RasPiOS Bullseye receiver
+- to update a 32bit RasPiOS Bullseye receiver:
   - `wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz`
 - `tar xvf *.tgz`
 - `cp -f rtlsdr-ogn/ogn-* <your_current_rtlsdr-ogn_folder>`
