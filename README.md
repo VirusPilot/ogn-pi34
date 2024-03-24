@@ -120,11 +120,14 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## steps to manually upgrade legacy platforms (e.g. a 64bit RasPiOS Bullseye receiver)
+## steps to manually upgrade legacy platforms
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
 - `cd temp`
-- `wget https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz`
+- to update a 64bit RasPiOS Bullseye receiver:
+  - `wget https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz`
+- to update a 32bit RasPiOS Bullseye receiver
+  - `wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz`
 - `tar xvf *.tgz`
 - `cp -f rtlsdr-ogn/ogn-* <your_current_rtlsdr-ogn_folder>`
 - if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
