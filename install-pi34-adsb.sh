@@ -2,23 +2,22 @@
 #set -x
 
 sudo apt update
-sudo apt install git lighttpd build-essential fakeroot debhelper pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
+sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
+sudo apt install debhelper -y
 
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
 
-# install librtlsdr
-if [ $ARCH -eq 64 ]; then
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_arm64.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_arm64.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_arm64.deb
-else
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_0.6.0-4_armhf.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_0.6.0-4_armhf.deb
-    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_0.6.0-4_armhf.deb
-fi
-sudo dpkg -i *.deb
-rm -f *.deb
+# install rtl-sdr-blog driver
+git clone https://github.com/rtlsdrblog/rtl-sdr-blog
+cd rtl-sdr-blog
+sudo dpkg-buildpackage -b --no-sign
+cd ..
+
+sudo dpkg -i librtlsdr0_*.deb
+sudo dpkg -i librtlsdr-dev_*.deb
+sudo dpkg -i rtl-sdr_*.deb
+
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist rtl2830 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
