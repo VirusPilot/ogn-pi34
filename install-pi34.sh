@@ -17,6 +17,9 @@ cd ..
 sudo dpkg -i librtlsdr0_*.deb
 sudo dpkg -i librtlsdr-dev_*.deb
 sudo dpkg -i rtl-sdr_*.deb
+rm -f *.deb
+rm -f *.buildinfo
+rm -f *.changes
 
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
