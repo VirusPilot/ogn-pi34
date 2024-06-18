@@ -6,14 +6,14 @@
 ## details about the scripts
 - standard script: `install-pi34.sh`
 - alternative script: `install-pi34-adsb.sh`
-  -  installs https://github.com/VirusPilot/dump1090 in addition to feed Open Glider Network with ADS-B
-  -  max. ADS-B SDR gain = 30dB (to prefer local traffic)
-  -  ADS-B SDR adaptive gain and adaptive burst mode enabled (to prefer local traffic)
+  - requires a **second SDR**
+  - installs https://github.com/VirusPilot/dump1090 in addition to feed Open Glider Network with ADS-B
+  - ADS-B SDR adaptive gain and adaptive burst mode enabled (to prefer local traffic)
 - Pi Zero 2W, Pi3, Pi4 or Pi5 are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.3.2 version enables **SDR autogain** to avoid crossmodulation
 - latest 0.3.2 version supports the following protocols:
-  - ADS-B (requires `dump1090-fa` runing on the same receiver)
+  - ADS-B (requires `dump1090-fa` runing on the same receiver but on a **second SDR**)
   - FLARM
   - OGN
   - SafeSky
