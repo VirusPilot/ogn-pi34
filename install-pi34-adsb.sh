@@ -9,16 +9,30 @@ ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
 
 # compile and install librtlsdr from https://github.com/osmocom/rtl-sdr
-cd
-git clone https://github.com/osmocom/rtl-sdr
-cd rtl-sdr
-mkdir build
-cd build
-cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON
-make
-sudo make install
+#cd
+#git clone https://github.com/osmocom/rtl-sdr
+#cd rtl-sdr
+#mkdir build
+#cd build
+#cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON
+#make
+#sudo make install
+#sudo ldconfig
+#cd
+
+# install librtlsdr from http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr
+if [ $ARCH -eq 64 ]; then
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_2.0.2-2_arm64.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_2.0.2-2_arm64.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_2.0.2-2_arm64.deb
+else
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr0_2.0.2-2_armhf.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/librtlsdr-dev_2.0.2-2_armhf.deb
+    wget http://ftp.de.debian.org/debian/pool/main/r/rtl-sdr/rtl-sdr_2.0.2-2_armhf.deb
+fi
+sudo dpkg -i *.deb
+rm -f *.deb
 sudo ldconfig
-cd
 
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
