@@ -1,6 +1,7 @@
 # scripts to built a receiver station to feed the Open Glider Network
 ## supported platforms by these scripts:
-- Bookworm (Debian 12): 64bit and 32bit
+- Bookworm (Debian 12): 64bit
+- Bookworm (Debian 12): 32bit (no RTL-SDR Blog V4 dongle support)
 - Bullseye (Debian 11): 32bit (no RTL-SDR Blog V4 dongle support)
 - for older RasPiOS versions please consider a manual update as described below
 ## details about the scripts
