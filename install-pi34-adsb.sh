@@ -8,18 +8,17 @@ sudo apt install debhelper -y
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
 
-# install rtl-sdr-blog driver
-git clone https://github.com/rtlsdrblog/rtl-sdr-blog
-cd rtl-sdr-blog
-sudo dpkg-buildpackage -b --no-sign
-cd ..
-
-sudo dpkg -i librtlsdr0_*.deb
-sudo dpkg -i librtlsdr-dev_*.deb
-sudo dpkg -i rtl-sdr_*.deb
-rm -f *.deb
-rm -f *.buildinfo
-rm -f *.changes
+# compile and install librtlsdr from https://github.com/osmocom/rtl-sdr
+cd
+git clone https://github.com/osmocom/rtl-sdr
+cd rtl-sdr
+mkdir build
+cd build
+cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON
+make
+sudo make install
+sudo ldconfig
+cd
 
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
