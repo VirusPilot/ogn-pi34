@@ -157,3 +157,6 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 - `sudo systemctl disable dphys-swapfile`
 - `sudo apt purge dphys-swapfile -y`
 - `sudo apt autoremove -y`
+### optional: enable read-only file system
+- `sudo raspi-config`
+- -> 4 Performance Options / P2 Overlay File System -> yes (not required for the boot partition)
