@@ -40,10 +40,13 @@ cd rtl-sdr
 mkdir build
 cd build
 cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON
-make
-sudo make install
-sudo ldconfig
+cd ..
+sudo dpkg-buildpackage -b --no-sign
 cd
+sudo dpkg -i *.deb
+rm -f *.deb
+rm -f *.buildinfo
+rm -f *.changes
 
 echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
@@ -92,7 +95,7 @@ git clone https://github.com/VirusPilot/dump1090.git
 cd dump1090
 sudo dpkg-buildpackage -b --no-sign --build-profiles=custom,rtlsdr
 cd ..
-sudo dpkg -i dump1090-fa_*.deb
+sudo dpkg -i *.deb
 rm -f *.deb
 rm -f *.buildinfo
 rm -f *.changes
