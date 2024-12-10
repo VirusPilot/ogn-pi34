@@ -150,8 +150,21 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ### remove Raspberry Pi USB power supply limitation
 - it might be necessary to remove the Raspberry Pi3 or Pi4 USB power supply limitation by adding `max_usb_current=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm)
 - it might be necessary to remove the Raspberry Pi5 USB power supply limitation by adding `usb_max_current_enable=1` to `/boot/firmware/config.txt` in case of Bookworm
-### SDR ppm calibration (only required for non-TCXO SDRs)
-- see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
+### SDR ppm calibration (important for non-TCXO SDRs, useful also for SDRs with TCXO)
+- for more details see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
+- the following steps are required:
+  - `sudo service rtlsdr-ogn stop` (on a running OGN receiver station)
+  - `cd rtlsdr-ogn`
+  - `./gsm_scan --device 0 --gain 25` (in case OGN is using SDR #0)
+  - `./gsm_scan --serial 868 --gain 25` (in case OGN is using the SDR with serial #868)
+  - identify the GSM frequency with the highest level (e.g. +20.0dB)
+  - you may have to adjust the gain value such that this highest level clearly sticks out of all other levels
+  - enter this frequency (e.g. 935.8) to `CenterFreq` in the GSM section of `Template.conf`
+  - enter the final gain value to `Gain` in the GSM section of `Template.conf`
+  - if nothing can be measured at all you may not have a GSM station nearby (in USA/Canada you need to add `--gsm-850`)
+  - `sudo service rtlsdr-ogn start`
+  - monitor the ogn-rf page on port 8082 how `Fine calib. FreqCorr` automatically adjusts over time
+  - if the `Fine calib. FreqCorr` value increases to a very high value (e.g. 15.0 ppm or more) then your SDR may not have a TCXO; in such case you should change the `FreqCorr` value in the RF section of `Template.conf` accordingly, followed by a `sudo service rtlsdr-ogn restart`
 ### optional: nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save
 ### optional: disable swapfile
