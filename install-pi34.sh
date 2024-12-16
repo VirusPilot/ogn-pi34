@@ -2,7 +2,7 @@
 #set -x
 
 sudo apt update
-sudo apt install git cmake libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
+sudo apt install git cmake libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet netcat-traditional -y
 sudo apt install debhelper -y
 
 ARCH=$(getconf LONG_BIT)
@@ -28,14 +28,13 @@ echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 
 # prepare rtlsdr-ogn
 if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
-  wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.3*.tgz
+  tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.3*.tgz
 else
   echo
   echo "wrong platform for this script, exiting"
   echo
   exit
 fi
-tar xvf *.tgz
 cp -f ogn-pi34/Template.conf rtlsdr-ogn/Template.conf
 cd rtlsdr-ogn
 sudo chown root gsm_scan ogn-rf rtlsdr-ogn
