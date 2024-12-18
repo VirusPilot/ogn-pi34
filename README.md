@@ -152,8 +152,9 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ### remove Raspberry Pi USB power supply limitation
 - it might be necessary to remove the Raspberry Pi3 or Pi4 USB power supply limitation by adding `max_usb_current=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm)
 - it might be necessary to remove the Raspberry Pi5 USB power supply limitation by adding `usb_max_current_enable=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm)
-### SDR ppm calibration (important for non-TCXO SDRs, useful also for SDRs with TCXO)
-- for more details see https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
+### SDR ppm correction (mandatory for non-TCXO SDRs)
+- https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
+### SDR ppm automatic fine calibration (+/- 10.0 ppm)
 - the following steps are required:
   - `sudo service rtlsdr-ogn stop` (on a running OGN receiver station)
   - `cd rtlsdr-ogn`
@@ -166,7 +167,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
   - if nothing can be measured at all you may not have a GSM station nearby (in USA/Canada you need to add `--gsm-850`)
   - `sudo service rtlsdr-ogn start`
   - monitor the ogn-rf page on port 8082 how `Fine calib. FreqCorr` automatically adjusts over time
-  - if the `Fine calib. FreqCorr` value increases to a very high value (e.g. 15.0 ppm or more) then your SDR may not have a TCXO; in such case you should change the `FreqCorr` value in the RF section of `Template.conf` accordingly, followed by a `sudo service rtlsdr-ogn restart`
+  - if the `Fine calib. FreqCorr` value increases to a very high value (e.g. +/- 15.0 ppm or more) then your SDR may not have a TCXO; in such case you should change the `FreqCorr` value in the RF section of `Template.conf` according to the prior section, followed by a `sudo service rtlsdr-ogn restart`
 ### optional: nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save
 ### optional: disable swapfile
