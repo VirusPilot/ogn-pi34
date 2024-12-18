@@ -167,7 +167,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
   - if nothing can be measured at all you may not have a GSM station nearby (in USA/Canada you need to add `--gsm-850`)
   - `sudo service rtlsdr-ogn start`
   - monitor the ogn-rf page on port 8082 how `Fine calib. FreqCorr` automatically adjusts over time
-  - if the `Fine calib. FreqCorr` value increases to a very high value (e.g. +/- 15.0 ppm or more) then your SDR may not have a TCXO; in such case you should change the `FreqCorr` value in the RF section of `Template.conf` according to the prior section, followed by a `sudo service rtlsdr-ogn restart`
+  - if the `Fine calib. FreqCorr` value increases to a very high value (more than +/- 10.0 ppm) then your SDR may not have a TCXO; in such case you should change the `FreqCorr` value in the RF section of `Template.conf` according to the prior section, followed by a `sudo service rtlsdr-ogn restart`
 ### optional: nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save
 ### optional: disable swapfile
