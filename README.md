@@ -170,7 +170,18 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
   - if the `Fine calib. FreqCorr` value increases to a very high value (more than +/- 10.0 ppm) then your SDR may not have a TCXO; in such case you should change the `FreqCorr` value in the RF section of `Template.conf` according to the prior section, followed by a `sudo service rtlsdr-ogn restart`
 ### optional: nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save
-### optional: disable swapfile
+### optional: automatic reboot after losing network connection (e.g router IP 192.168.1.1)
+- the following steps are required:
+  - `sudo apt update`
+  - `sudo apt install watchdog`
+  - `sudo nano /etc/watchdog.conf` and add the following lines:
+    - `ping       = 192.168.1.1`
+    - `ping-count = 5`
+    - `reboot     = yes`
+  - `sudo systemctl enable watchdog`
+  - `sudo systemctl start watchdog`
+  - `journalctl --list-boots` lists all reboots
+- ### optional: disable swapfile
 - `sudo systemctl disable dphys-swapfile`
 - `sudo apt purge dphys-swapfile -y`
 - `sudo apt autoremove -y`
