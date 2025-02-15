@@ -27,7 +27,7 @@ echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
 
 # prepare rtlsdr-ogn
-if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 11 ]; then
+if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 12 ]; then
   tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.3*.tgz
 else
   echo
