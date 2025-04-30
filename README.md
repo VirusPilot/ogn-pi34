@@ -177,7 +177,6 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
   - `sudo nano /etc/watchdog.conf` and add the following lines:
     - `ping       = 192.168.1.1`
     - `ping-count = 5`
-    - `reboot     = yes`
   - `sudo systemctl enable watchdog`
   - `sudo systemctl start watchdog`
   - `journalctl --list-boots` lists all reboots
