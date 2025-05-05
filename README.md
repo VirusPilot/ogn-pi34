@@ -3,7 +3,7 @@
 - Bookworm (Debian 12): 64bit
 - Bookworm (Debian 12): 32bit
 - Bullseye (Debian 11): 32bit
-- for older RasPiOS versions please consider a manual update as described below
+- for older RasPiOS versions please consider a manual update as described below, you can find out your platform version and architecture with `getconf LONG_BIT` (shows the Debian version) and `lsb_release -r -s` (32bit or 64bit)
 ## details about the scripts
 - standard script: `install-pi34.sh`
 - alternative script: `install-pi34-adsb.sh`
