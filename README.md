@@ -118,7 +118,7 @@ git clone -b dev https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34.sh
 ```
 
-## automatic setup (alternative script that installs dump1090-fa in addition)
+## automatic setup 1 (alternative script that installs dump1090-fa in addition)
 - based on https://github.com/VirusPilot/dump1090
 ```
 sudo apt update
@@ -128,7 +128,7 @@ git clone -b dev https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
-## automatic setup (alternative script that installs dump1090-fa in addition)
+## automatic setup 2 (alternative script that installs ogn2dump1090)
 - based on https://github.com/VirusPilot/dump1090
 ```
 sudo apt update
