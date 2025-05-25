@@ -3,7 +3,7 @@
 - Bookworm (Debian 12): 64bit
 - Bookworm (Debian 12): 32bit
 - Bullseye (Debian 11): 32bit
-- for older RasPiOS versions please consider a manual update as described below
+- for older RasPiOS versions please consider a manual update as described below, you can find out your platform version and architecture with `getconf LONG_BIT` (shows the Debian version) and `lsb_release -r -s` (32bit or 64bit)
 ## details about the scripts
 - standard script: `install-pi34.sh`
 - alternative script: `install-pi34-adsb.sh`
@@ -28,12 +28,12 @@
   - ...
 
 ## packages for manual update of legacy platforms
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie.tgz
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie_JPEG.tgz
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie.tgz
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie_JPEG.tgz
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-x86-0.3.2_Buster.tgz
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz (64-bit ARM aarch64)
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie.tgz (32-bit ARM)
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie_JPEG.tgz (32-bit ARM)
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie.tgz (32-bit ARM)
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie_JPEG.tgz (32-bit ARM)
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-x86-0.3.2_Buster.tgz (32-bit Intel 80386)
 
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
 - flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
@@ -177,7 +177,6 @@ git clone -b dev https://github.com/VirusPilot/ogn-pi34.git
   - `sudo nano /etc/watchdog.conf` and add the following lines:
     - `ping       = 192.168.1.1`
     - `ping-count = 5`
-    - `reboot     = yes`
   - `sudo systemctl enable watchdog`
   - `sudo systemctl start watchdog`
   - `journalctl --list-boots` lists all reboots
