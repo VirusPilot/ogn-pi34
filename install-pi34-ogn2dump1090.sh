@@ -19,12 +19,7 @@ rm -f *.buildinfo
 rm -f *.changes
 
 # legacy DVB-T TV drivers need to be properly blacklisted (e.g. they will activate the bias tee by default)
-echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist rtl2830 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
+echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
 
 # install rtlsdr-ogn
 if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 12 ]; then
