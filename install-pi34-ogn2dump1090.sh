@@ -80,6 +80,10 @@ echo "aprs_subscribe_filter = "r/48.0/10.0/20""
 echo
 read -p "Press any key to continue"
 sudo nano config.py
+OGN2DUMP1090DIR=$(pwd) envsubst < ogn2dump1090.service.template > ogn2dump1090.service
+sudo mv ogn2dump1090.service /etc/systemd/system/
+sudo systemctl enable ogn2dump1090
+sudo systemctl start ogn2dump1090
 
 echo
 read -t 1 -n 10000 discard
