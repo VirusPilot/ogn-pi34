@@ -53,11 +53,13 @@ cd
 sudo bash -c "$(wget -O - https://github.com/wiedehopf/adsb-scripts/raw/master/readsb-install.sh)"
 
 echo
-echo "Now the readsb config file needs to be edited according to your credentials, e.g:"
+echo "Now the readsb config file needs to be modified as follows,"
+echo "modify the device ID (or serial) and your receiver coordinates"
+echo "and don't forget to add --net-sbs-in-port 30008 to NET_OPTIONS"
 echo
 echo "RECEIVER_OPTIONS="--device 1090 --device-type rtlsdr --gain auto-verbose --ppm 0""
 echo "DECODER_OPTIONS="--lat 48.0 --lon 10.0 --max-range 450 --write-json-every 1""
-echo "NET_OPTIONS="--net --net-heartbeat 60 --net-ro-size 1250 --net-ro-interval 0.05 --net-ri-port 30001 --net-ro-port 30002 --net-sbs-port 30003 --net-sbs-in-port 30008 --net-bi-port 30004,30104 --net-bo-port 30005""
+echo "NET_OPTIONS=--net --net-sbs-in-port 30008"
 echo
 read -p "Press any key to continue"
 sudo nano /etc/default/readsb
