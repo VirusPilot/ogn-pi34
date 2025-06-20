@@ -2,7 +2,7 @@
 #set -x
 
 sudo apt update
-sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet netcat-traditional debhelper python3-pip -y
+sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet netcat-traditional debhelper python3-pip python3-aiohttp -y
 
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
@@ -79,6 +79,7 @@ echo
 echo "Now the ogn2dump1090 config file needs to be edited according to your credentials, e.g:"
 echo
 echo "aprs_subscribe_filter = "r/48.0/10.0/20""
+echo "metar_source = "ETHN""
 echo
 read -p "Press any key to continue"
 sudo nano config.py
