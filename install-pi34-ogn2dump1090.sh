@@ -84,7 +84,6 @@ echo
 echo "Now the ogn2dump1090 config file needs to be edited according to your credentials, e.g:"
 echo
 echo "aprs_subscribe_filter = "r/48.0/10.0/20""
-echo "metar_source = "ETHN""
 echo
 read -p "Press any key to continue"
 sudo nano config.py
