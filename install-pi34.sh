@@ -19,14 +19,10 @@ rm -f *.deb
 rm -f *.buildinfo
 rm -f *.changes
 
-echo blacklist rtl2832 | sudo tee /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist r820t | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist rtl2830 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist dvb_usb_rtl28xxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist dvb_usb_v2 | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
-echo blacklist rtl8xxxu | sudo tee -a /etc/modprobe.d/rtl-sdr-blacklist.conf
+# legacy DVB-T TV drivers need to be properly blacklisted (e.g. they will activate the bias tee by default)
+echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
 
-# prepare rtlsdr-ogn
+# install rtlsdr-ogn
 if [ "$ARCH" -eq 64 ] && [ "$DIST" -ge 12 ]; then
   wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.2.tgz
 else
