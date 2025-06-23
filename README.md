@@ -6,10 +6,15 @@
 - for older RasPiOS versions please consider a manual update as described below, you can find out your platform version and architecture with `getconf LONG_BIT` (shows the Debian version) and `lsb_release -r -s` (32bit or 64bit)
 ## details about the scripts
 - standard script: `install-pi34.sh`
-- alternative script: `install-pi34-adsb.sh`
+- alternative script (1): `install-pi34-adsb.sh`
   - requires a **second SDR**
   - installs https://github.com/VirusPilot/dump1090 in addition to feed Open Glider Network with ADS-B
   - ADS-B SDR adaptive gain and adaptive burst mode enabled (to prefer local traffic)
+- alternative script (2): `install-pi34-ogn2dump1090.sh`
+  - requires a **second SDR**
+  - installs https://github.com/b3nn0/ogn2dump1090
+  - feeds Open Glider Network with ADS-B
+  - inject Open Glider Network Traffic for display on a unified local tar1090 map
 - Pi Zero 2W, Pi3, Pi4 or Pi5 are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.3.2 version enables **SDR autogain** to avoid crossmodulation
@@ -113,7 +118,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34.sh
 ```
 
-## automatic setup (alternative script that installs dump1090-fa in addition)
+## automatic setup 1 (alternative script that installs dump1090-fa in addition)
 - based on https://github.com/VirusPilot/dump1090
 ```
 sudo apt update
@@ -121,6 +126,15 @@ sudo apt full-upgrade -y
 sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
+```
+
+## automatic setup 2 (alternative script that installs rtlsrd-ogn, readsb and ogn2dump1090)
+```
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt install git -y
+git clone https://github.com/VirusPilot/ogn-pi34.git
+./ogn-pi34/install-pi34-ogn2dump1090.sh
 ```
 
 ## steps to manually upgrade legacy platforms
