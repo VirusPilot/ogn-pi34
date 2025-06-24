@@ -163,7 +163,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 - `sudo service rtlsdr-ogn status` (to verify that the new version is running)
 
 ## post install modifications
-- please note that a valid and accurate Raspberry Pi system time is required for a proper decoding of traffic; this can be checked with `timedatectl` (System clock synchronized: yes, NTP service: active)
+- please note that a valid and accurate Raspberry Pi system time is required for a proper decoding of traffic (this can be checked with `ntptime -r`)
 ### remove Raspberry Pi USB power supply limitation
 - it might be necessary to remove the Raspberry Pi3 or Pi4 USB power supply limitation by adding `max_usb_current=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm)
 - it might be necessary to remove the Raspberry Pi5 USB power supply limitation by adding `usb_max_current_enable=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm)
