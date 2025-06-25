@@ -2,8 +2,8 @@
 #set -x
 
 sudo apt update
-sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet -y
-sudo apt install debhelper -y
+sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx systemd-timesyncd procserv telnet netcat-traditional debhelper -y
+sudo apt autoremove -y
 
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
@@ -40,7 +40,6 @@ cp -f ogn-pi34/Template.conf rtlsdr-ogn/Template.conf
 cd rtlsdr-ogn
 sudo chown root gsm_scan ogn-rf rtlsdr-ogn
 sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn
-# sudo mknod gpu_dev c 100 0
 
 echo
 echo "Please edit Template.conf, to set-up the receiver:"
@@ -55,6 +54,11 @@ wget http://download.glidernet.org/common/WW15MGH.DAC
 sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
 sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo update-rc.d rtlsdr-ogn defaults
+
+# install systemd-timesyncd and enable ntp sync
+sudo systemctl enable systemd-timesyncd
+sudo systemctl start systemd-timesyncd
+sudo timedatectl set-ntp true
 
 # install dump1090-fa service
 cd

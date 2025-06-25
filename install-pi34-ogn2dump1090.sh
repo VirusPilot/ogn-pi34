@@ -2,7 +2,8 @@
 #set -x
 
 sudo apt update
-sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx ntp ntpdate procserv telnet netcat-traditional debhelper python3-pip python3-aiohttp -y
+sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx systemd-timesyncd procserv telnet netcat-traditional debhelper python3-pip python3-aiohttp -y
+sudo apt autoremove -y
 
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
@@ -52,6 +53,11 @@ wget http://download.glidernet.org/common/WW15MGH.DAC
 sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
 sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo update-rc.d rtlsdr-ogn defaults
+
+# install systemd-timesyncd and enable ntp sync
+sudo systemctl enable systemd-timesyncd
+sudo systemctl start systemd-timesyncd
+sudo timedatectl set-ntp true
 
 # install readsb
 cd
