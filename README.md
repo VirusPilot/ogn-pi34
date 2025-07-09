@@ -159,6 +159,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 - `cd <your_current_rtlsdr-ogn_folder>`
 - `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
 - `sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn`
+- 'sudo mknod gpu_dev c 100 0` (only required for GPU version)
 - `sudo service rtlsdr-ogn restart` or `sudo reboot`
 - `sudo service rtlsdr-ogn status` (to verify that the new version is running)
 
