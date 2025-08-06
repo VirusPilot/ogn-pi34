@@ -66,11 +66,12 @@ sudo bash -c "$(wget -O - https://github.com/wiedehopf/adsb-scripts/raw/master/r
 echo
 echo "Now the readsb config file needs to be modified as follows,"
 echo "modify the device ID (or serial) and your receiver coordinates"
-echo "and don't forget to add --net-sbs-in-port 30008 to NET_OPTIONS"
+echo "and don't forget to add --net-sbs-jaero-in-port 30008 --jaero-timeout 1 to NET_OPTIONS"
 echo
-echo "RECEIVER_OPTIONS="--device 1090 --device-type rtlsdr --gain auto-verbose --ppm 0""
-echo "DECODER_OPTIONS="--lat 48.0 --lon 10.0 --max-range 450 --write-json-every 1""
-echo NET_OPTIONS="--net --net-ri-port 30001 --net-ro-port 30002 --net-sbs-port 30003 --net-bi-port 30004,30104 --net-bo-port 30005 --net-sbs-jaero-in-port 30008 --jaero-timeout 1"
+echo 'RECEIVER_OPTIONS="--device 1090 --device-type rtlsdr --gain auto-verbose --ppm 0"'
+echo 'DECODER_OPTIONS="--lat 48.0 --lon 10.0 --max-range 0 --write-json-every 1"'
+echo 'NET_OPTIONS="--net --net-ri-port 30001 --net-ro-port 30002 --net-sbs-port 30003 --net-bi-port 30004,30104 --net-bo-port 30005 --net-sbs-jaero-in-port 30008 --jaero-timeout 1"'
+echo 'JSON_OPTIONS="--json-location-accuracy 2 --range-outline-hours 24"'
 echo
 read -p "Press any key to continue"
 sudo nano /etc/default/readsb
