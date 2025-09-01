@@ -1,4 +1,5 @@
 # scripts to built a receiver station to feed the Open Glider Network
+a **docker** version of `install-pi34-ogn2dump1090` is available here: https://github.com/VirusPilot/docker-ogn2readsb
 ## supported platforms by these scripts:
 - Bookworm (Debian 12): 64bit
 - Bookworm (Debian 12): 32bit
