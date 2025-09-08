@@ -187,8 +187,8 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
   - if the `Fine calib. FreqCorr` value increases to a very high value (more than +/- 10.0 ppm) then your SDR may not have a TCXO; in such case you should change the `FreqCorr` value in the RF section of `Template.conf` according to the prior section, followed by a `sudo service rtlsdr-ogn restart`
 ### optional: nightly reboot at 1 am
 - execute the following: `sudo crontab -e` then add `0 1 * * * /sbin/reboot` and save
-### optional: weekly update of OGN database
-- execute the following: `sudo crontab -e` then add `0 5 * * 1 /usr/bin/wget -O ogn2dump1090/ddb.json http://ddb.glidernet.org/download/?j=1` and save
+### optional: daily update of OGN database at 2 am
+- execute the following: `sudo crontab -e` then add `0 2 * * * /usr/bin/wget -O /home/pi/ogn2dump1090/ddb.json http://ddb.glidernet.org/download/?j=1 && sudo service ogn2dump1090 restart` and save
 ### optional: automatic reboot after losing network connection (e.g router IP 192.168.1.1)
 - the following steps are required:
   - `sudo apt update`
