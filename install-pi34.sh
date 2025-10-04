@@ -2,22 +2,11 @@
 #set -x
 
 sudo apt update
-sudo apt install git cmake libfftw3-bin libusb-1.0-0-dev lynx systemd-timesyncd procserv telnet netcat-traditional debhelper -y
+sudo apt install librtlsdr-dev librtlsdr0 rtl-sdr git cmake libfftw3-bin libusb-1.0-0-dev lynx chrony procserv telnet netcat-traditional debhelper -y
 sudo apt autoremove -y
 
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
-
-# compile and install librtlsdr from https://github.com/osmocom/rtl-sdr
-cd
-git clone https://github.com/osmocom/rtl-sdr
-cd rtl-sdr
-sudo dpkg-buildpackage -b --no-sign
-cd
-sudo dpkg -i *.deb
-rm -f *.deb
-rm -f *.buildinfo
-rm -f *.changes
 
 # legacy DVB-T TV drivers need to be properly blacklisted (e.g. they will activate the bias tee by default)
 echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
@@ -54,11 +43,6 @@ wget http://download.glidernet.org/common/WW15MGH.DAC
 sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
 sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo update-rc.d rtlsdr-ogn defaults
-
-# install systemd-timesyncd and enable ntp sync
-sudo systemctl enable systemd-timesyncd
-sudo systemctl start systemd-timesyncd
-sudo timedatectl set-ntp true
 
 echo
 read -t 1 -n 10000 discard
