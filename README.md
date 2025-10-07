@@ -1,7 +1,12 @@
-# scripts to built a receiver station to feed the Open Glider Network
-a **docker** version of `install-pi34-ogn2dump1090` is available here: https://github.com/VirusPilot/docker-ogn2readsb
+# scripts to built a receiver station to feed the Open Glider Network:
+- [standard install script](#automatic-setup-standard-script)
+- [install script with OGN and ADS-B (dump1090)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
+- [ogn2readsb install script (OGN and ADS-B on a unified map)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090)
+# docker versions are available here (recommended)
+- https://github.com/VirusPilot/docker-ogn
+- https://github.com/VirusPilot/docker-ogn2readsb
 ## supported platforms by these scripts:
-- Trixie (Debian 13): 64bit (with native RTL-SDR Blog v4 support)
+- **Trixie (Debian 13): 64bit (with native RTL-SDR Blog v4 support)**
 - Bookworm (Debian 12): 64bit
 - Bookworm (Debian 12): 32bit
 - Bullseye (Debian 11): 32bit
