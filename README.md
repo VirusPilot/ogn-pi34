@@ -117,7 +117,7 @@ HTTP:           # this section is required to be able to monitor the different s
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
+git clone --branch trixie https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34.sh
 ```
 
@@ -127,7 +127,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
+git clone --branch trixie https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
@@ -136,7 +136,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
+git clone --branch trixie https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-ogn2dump1090.sh
 ```
 
