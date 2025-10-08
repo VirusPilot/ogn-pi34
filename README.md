@@ -1,6 +1,12 @@
-# scripts to built a receiver station to feed the Open Glider Network
-a **docker** version of `install-pi34-ogn2dump1090` is available here: https://github.com/VirusPilot/docker-ogn2readsb
+# scripts to built a receiver station to feed the Open Glider Network:
+- [standard install script](#automatic-setup-standard-script)
+- [install script with OGN and ADS-B (dump1090)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
+- [ogn2readsb install script (OGN and ADS-B on a unified map)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090)
+# docker versions are available here (recommended)
+- https://github.com/VirusPilot/docker-ogn
+- https://github.com/VirusPilot/docker-ogn2readsb
 ## supported platforms by these scripts:
+- **Trixie (Debian 13): 64bit (with native RTL-SDR Blog v4 support)**
 - Bookworm (Debian 12): 64bit
 - Bookworm (Debian 12): 32bit
 - Bullseye (Debian 11): 32bit
@@ -64,7 +70,8 @@ RF:
   #DeviceSerial = "868";   # alternative device selection based on SDR serial number (SN), please doublecheck post-install using "rtl_test"
   FreqCorr = 0;            # [ppm] SDR correction factor, newer sticks have a TCXO so no correction required
   SampleRate = 2.0;        # [MHz] 1.0 or 2.0MHz, 2MHz is required to captue PilotAware
-  BiasTee  = 0;            # just a safeguard
+  BiasTee  = 0;            # BiasTee is disabled by default, only enable it if you are sure about your setup,
+                           # e.g. your SDR is NOT directly connected to a DC short circuited antenna unless you are using an LNA
 };
 ```
 In case your OGN station is in an area with no GSM stations then the automatic gsm_scan should be deactivated by changing to `GSM.CenterFreq=0` (as an alternative you can ommit the entire GSM section for SDRs with TCXO):
@@ -115,7 +122,7 @@ HTTP:           # this section is required to be able to monitor the different s
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
+git clone --branch trixie https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34.sh
 ```
 
@@ -125,7 +132,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
+git clone --branch trixie https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
 
@@ -134,7 +141,7 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
+git clone --branch trixie https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-ogn2dump1090.sh
 ```
 

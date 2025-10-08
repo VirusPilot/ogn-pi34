@@ -2,22 +2,11 @@
 #set -x
 
 sudo apt update
-sudo apt install git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx systemd-timesyncd procserv telnet netcat-traditional debhelper python3-pip python3-aiohttp -y
+sudo apt install librtlsdr-dev librtlsdr0 rtl-sdr git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx chrony procserv telnet netcat-traditional debhelper python3-pip python3-aiohttp -y
 sudo apt autoremove -y
 
 ARCH=$(getconf LONG_BIT)
 DIST=$(lsb_release -r -s)
-
-# compile and install librtlsdr from https://github.com/osmocom/rtl-sdr
-cd
-git clone https://github.com/osmocom/rtl-sdr
-cd rtl-sdr
-sudo dpkg-buildpackage -b --no-sign
-cd
-sudo dpkg -i *.deb
-rm -f *.deb
-rm -f *.buildinfo
-rm -f *.changes
 
 # legacy DVB-T TV drivers need to be properly blacklisted (e.g. they will activate the bias tee by default)
 echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
@@ -54,11 +43,6 @@ sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
 sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo update-rc.d rtlsdr-ogn defaults
 
-# install systemd-timesyncd and enable ntp sync
-sudo systemctl enable systemd-timesyncd
-sudo systemctl start systemd-timesyncd
-sudo timedatectl set-ntp true
-
 # install readsb
 cd
 sudo bash -c "$(wget -O - https://github.com/wiedehopf/adsb-scripts/raw/master/readsb-install.sh)"
@@ -75,6 +59,15 @@ echo 'JSON_OPTIONS="--json-location-accuracy 2 --range-outline-hours 24"'
 echo
 read -p "Press any key to continue"
 sudo nano /etc/default/readsb
+
+# relabel OGN traffic
+cd /usr/local/share/tar1090/html &&  \
+  echo 'jaeroTimeout = 60;' | sudo tee -a /usr/local/share/tar1090/html/config.js &&  \
+  echo 'jaeroLabel = "OGN";' | sudo tee -a /usr/local/share/tar1090/html/config.js
+
+# add traffic patterns
+cd
+sudo cp -f ogn-pi34/Platzrunden_5.25.2.1.geojson /usr/local/share/tar1090/html/geojson/UK_Mil_RC.geojson
 
 # install python-ogn-client (required for ogn2dump1090)
 cd
