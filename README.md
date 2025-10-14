@@ -174,8 +174,8 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 ## post install modifications
 - please note that an accurate Raspberry Pi system time is required for a proper decoding of traffic, e.g. synchronized via systemd-timesyncd (default) or ntp
 ### remove Raspberry Pi USB power supply limitation
-- it might be necessary to remove the Raspberry Pi3 or Pi4 USB power supply limitation by adding `max_usb_current=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm)
-- it might be necessary to remove the Raspberry Pi5 USB power supply limitation by adding `usb_max_current_enable=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm)
+- it might be necessary to remove the Raspberry Pi3 or Pi4 USB power supply limitation by adding `max_usb_current=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm or Trixie)
+- it might be necessary to remove the Raspberry Pi5 USB power supply limitation by adding `usb_max_current_enable=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm or Trixie)
 ### SDR ppm correction (mandatory for non-TCXO SDRs)
 - https://github.com/glidernet/ogn-rf/blob/6d6cd8a15a5fbff122542401180ea7e58af9ed92/INSTALL#L42
 ### SDR ppm automatic fine calibration (+/- 10.0 ppm)
