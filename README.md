@@ -1,3 +1,7 @@
+# NEW: v0.3.3 libraries for Debian Trixie
+- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.3_Trixie.tgz
+- install scripts yet tbd.
+
 # scripts to built a receiver station to feed the Open Glider Network:
 - [standard install script](#automatic-setup-standard-script)
 - [install script with OGN and ADS-B (dump1090)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
