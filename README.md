@@ -1,6 +1,12 @@
 # NEW: v0.3.3 libraries for Debian Trixie
 - https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.3_Trixie.tgz
-- install scripts yet tbd.
+```
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt install git -y
+git clone https://github.com/VirusPilot/ogn-pi34.git
+./ogn-pi34/install-pi34-v0.3.3-trixie.sh
+```
 
 # scripts to built a receiver station to feed the Open Glider Network:
 - [standard install script](#automatic-setup-standard-script)
