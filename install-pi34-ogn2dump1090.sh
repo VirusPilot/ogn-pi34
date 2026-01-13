@@ -67,7 +67,7 @@ cd /usr/local/share/tar1090/html &&  \
 
 # add traffic patterns
 cd
-sudo cp -f ogn-pi34/Platzrunden+Segler_N_5.25.4.geojson /usr/local/share/tar1090/html/geojson/UK_Mil_RC.geojson
+sudo cp -f ogn-pi34/Platzrunden+Segler_N_5.25.5.geojson /usr/local/share/tar1090/html/geojson/UK_Mil_RC.geojson
 
 # install python-ogn-client (required for ogn2dump1090)
 cd
