@@ -48,7 +48,7 @@ case "${ARCH}_${DIST}" in
     echo
     echo "installing OGN v0.3.3 (January 2026 version) on 64bit Linux (x86_64 Ubuntu or Debian) is not supported"
     echo "please consider using the related docker version or do a manual install"
-    echo "press Return to continue or Ctr-C to abort"
+    echo "press Return to exit"
     read -r
     exit 1
     ;;
