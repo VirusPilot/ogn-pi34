@@ -1,12 +1,11 @@
-# NEW: v0.3.3 libraries for Debian Trixie
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.3_Trixie.tgz
-```
-sudo apt update
-sudo apt full-upgrade -y
-sudo apt install git -y
-git clone https://github.com/VirusPilot/ogn-pi34.git
-./ogn-pi34/install-pi34-v0.3.3-trixie.sh
-```
+# NEW: v0.3.3 ogn libraries for 64bit Debian 13 Trixie
+- the [standard install script](#automatic-setup-standard-script) now includes v0.3.3 (January 2026) but only for 64bit Debian 13 Trixie platforms, on older platforms (64bit Debian 11, 12 or 32bit Debian 11) v0.3.2 (March 2024 version) is installed, therefore please consider upgrading to 64bit Debian 13 Trixie
+- for a fresh sepup, please follow the following steps:
+  - [prepare script](#prepare-script-for-pi3-pi4-pi5-or-pi-zero-2w)
+  - [preparation of credentials](#preparation-of-credentials)
+  - [standard install script](#automatic-setup-standard-script)
+- the docker versions have already been upgraded to v0.3.3, the containers are running 64bit Debian 13 Trixie inside but can be hosted on older platforms like 64bit Debian 11 or 12
+- tbd: updating alternative script (1) and (2) but for these cases [docker-ogn2readsb](https://github.com/VirusPilot/docker-ogn2readsb) is recommended anyway
 
 # scripts to built a receiver station to feed the Open Glider Network:
 - [standard install script](#automatic-setup-standard-script)
@@ -58,12 +57,13 @@ git clone https://github.com/VirusPilot/ogn-pi34.git
 - https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-x86-0.3.2_Buster.tgz (32-bit Intel 80386)
 
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
-- flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest Raspberry Pi Imager with the following settings:
+- flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest [Raspberry Pi Imager](https://www.raspberrypi.com/software/) with the following settings:
   - select appropriate hostname
   - enable ssh
   - enable user pi with password
   - configure WiFi (particularly important for Pi Zero 2W)
 - boot and wait until your Pi is connected to your LAN or WiFi
+- connect to your pi with ssh
 
 ## preparation of credentials
 During the setup process you will be automatically asked to edit `Template.conf` and potentially `dump1090-fa` for which you should have the following credentials at hand:
