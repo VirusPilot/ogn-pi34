@@ -60,7 +60,7 @@
 - flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest [Raspberry Pi Imager](https://www.raspberrypi.com/software/) with the following settings:
   - select appropriate hostname
   - enable ssh
-  - enable user pi with password
+  - enable user pi with password (all these scripts need to run as user "pi" but they also require sudo privileges; when your user "pi" was the first created user on a Raspberry Pi, it will have passwordless sudo privileges)
   - configure WiFi (particularly important for Pi Zero 2W)
 - boot and wait until your Pi is connected to your LAN or WiFi
 - connect to your pi with ssh
