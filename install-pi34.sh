@@ -59,29 +59,27 @@ case "${ARCH}_${DIST}" in
     exit 1
     ;;
 esac
-cp -f ogn-pi34/Template.conf rtlsdr-ogn/Template.conf
-cd rtlsdr-ogn
-# sudo chown root gsm_scan ogn-rf rtlsdr-ogn
-# sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn
 
+# copy systemd files
+sudo cp -v ogn-pi34/rtlsdr-ogn-rf.service /etc/systemd/system/
+sudo cp -v ogn-pi34/rtlsdr-ogn-decode.service /etc/systemd/system/
+sudo cp -v ogn-pi34/rtlsdr-ogn.target /etc/systemd/system/
+
+# prepare OGN configuration file
+cp -v ogn-pi34/Template.conf rtlsdr-ogn/Template.conf
 echo
 echo "Please edit Template.conf, to set-up the receiver:"
 echo "enter your ppm correction, GSM frequency for calibration, geographical position and APRS name"
 echo
 read -p "Press any key to continue"
-sudo nano Template.conf
+nano rtlsdr-ogn/Template.conf
 
-wget http://download.glidernet.org/common/WW15MGH.DAC
+# download EGM grid file
+wget http://download.glidernet.org/common/WW15MGH.DAC -O rtlsdr-ogn/WW15MGH.DAC
 
-# install rtlsdr-ogn service
-sudo cp -v rtlsdr-ogn /etc/init.d/rtlsdr-ogn
-sudo cp -v rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
-sudo update-rc.d rtlsdr-ogn defaults
-
-echo
-read -t 1 -n 10000 discard
-read -p "Reboot now? [y/n]" -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  sudo reboot
-fi
+# enable and start rtlsdr-ogn service
+sudo systemctl daemon-reload
+sudo systemctl enable rtlsdr-ogn-rf.service
+sudo systemctl enable rtlsdr-ogn-decode.service
+sudo systemctl enable rtlsdr-ogn.target
+sudo systemctl start rtlsdr-ogn.target

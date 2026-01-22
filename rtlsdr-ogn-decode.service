@@ -1,0 +1,20 @@
+[Unit]
+Description=OGN Receiver Decode (port 50001)
+After=rtlsdr-ogn-rf.service
+Requires=rtlsdr-ogn-rf.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/procServ -f -p /tmp/procServ-50001.pid -k ^X --killsig 15 -x ^C -i ^D \
+          -c /home/pi/rtlsdr-ogn 50001 ./ogn-decode Template.conf
+User=pi
+WorkingDirectory=/home/pi/rtlsdr-ogn
+
+Restart=on-failure
+RestartSec=5
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

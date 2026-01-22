@@ -1,0 +1,7 @@
+[Unit]
+Description=OGN Receiver (rf + decode)
+Requires=rtlsdr-ogn-rf.service rtlsdr-ogn-decode.service
+After=rtlsdr-ogn-rf.service rtlsdr-ogn-decode.service
+
+[Install]
+WantedBy=multi-user.target
