@@ -1,0 +1,17 @@
+[Unit]
+Description=OGN Receiver Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+WorkingDirectory=/home/pi/rtlsdr-ogn
+ExecStart=/home/pi/rtlsdr-ogn/rtlsdr-ogn start
+ExecStop=/home/pi/rtlsdr-ogn/rtlsdr-ogn stop
+ExecReload=/home/pi/rtlsdr-ogn/rtlsdr-ogn reload
+RemainAfterExit=yes
+Restart=no
+SyslogIdentifier=rtlsdr-ogn
+
+[Install]
+WantedBy=multi-user.target
