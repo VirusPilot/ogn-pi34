@@ -3,14 +3,13 @@
 - for a fresh sepup, please follow the following steps:
   - [prepare script](#prepare-script-for-pi3-pi4-pi5-or-pi-zero-2w)
   - [preparation of credentials](#preparation-of-credentials)
-  - [standard install script](#automatic-setup-standard-script)
+  - [one of the following install scripts](#scripts-to-built-a-receiver-station-to-feed-the-open-glider-network)
 - the docker versions have already been upgraded to v0.3.3, the containers are running 64bit Debian 13 Trixie inside but can be hosted on older platforms like 64bit Debian 11 or 12
-- tbd: updating alternative script (1) and (2) but for these cases [docker-ogn2readsb](https://github.com/VirusPilot/docker-ogn2readsb) is recommended anyway
 
 # scripts to built a receiver station to feed the Open Glider Network:
 - [standard install script](#automatic-setup-standard-script)
-- [install script with OGN and ADS-B (dump1090)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
-- [ogn2readsb install script (OGN and ADS-B on a unified tar1090 map)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090)
+- [install script with OGN and ADS-B (using dump1090-fa)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
+- [ogn2readsb install script (OGN and ADS-B on a unified tar1090 map, using readsb)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090)
 # docker versions are available here (recommended)
 - https://github.com/VirusPilot/docker-ogn
 - https://github.com/VirusPilot/docker-ogn2readsb
@@ -28,6 +27,7 @@
   - ADS-B SDR adaptive gain and adaptive burst mode enabled (to prefer local traffic)
 - alternative script (2): `install-pi34-ogn2dump1090.sh`
   - requires a **second SDR**
+  - installs https://github.com/wiedehopf/readsb
   - installs https://github.com/b3nn0/ogn2dump1090
   - feeds Open Glider Network with ADS-B
   - inject Open Glider Network Traffic for display on a unified local tar1090 map
@@ -64,6 +64,7 @@
   - configure WiFi (particularly important for Pi Zero 2W)
 - boot and wait until your Pi is connected to your LAN or WiFi
 - connect to your pi with ssh
+- **all scripts need to be exectuted from the /home/pi directory**
 
 ## preparation of credentials
 During the setup process you will be automatically asked to edit `Template.conf` and potentially `dump1090-fa` for which you should have the following credentials at hand:
@@ -135,7 +136,9 @@ sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34.sh
 ```
-
+crosscheck:
+- e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
+- e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
 ## automatic setup 1 (alternative script that installs dump1090-fa in addition)
 - based on https://github.com/VirusPilot/dump1090
 ```
@@ -145,7 +148,10 @@ sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-adsb.sh
 ```
-
+crosscheck:
+- e.g. http://raspberrypi:8080 for monitoring ADS-B traffic
+- e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
+- e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
 ## automatic setup 2 (alternative script that installs rtlsrd-ogn, readsb and ogn2dump1090)
 ```
 sudo apt update
@@ -154,7 +160,10 @@ sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34-ogn2dump1090.sh
 ```
-
+crosscheck (after the reboot):
+- e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
+- e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
+- e.g. http://raspberrypi/tar1090 for monitoring OGN and ADS-B traffic on the unified map
 ## steps to manually upgrade legacy platforms
 `ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
 - `mkdir temp`
