@@ -61,9 +61,6 @@ case "${ARCH}_${DIST}" in
 esac
 
 # copy systemd files
-#sudo cp -v ogn-pi34/rtlsdr-ogn-rf.service /etc/systemd/system/
-#sudo cp -v ogn-pi34/rtlsdr-ogn-decode.service /etc/systemd/system/
-#sudo cp -v ogn-pi34/rtlsdr-ogn.target /etc/systemd/system/
 sudo cp -v rtlsdr-ogn/rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
 sudo cp -v ogn-pi34/rtlsdr-ogn.service /etc/systemd/system/
 
@@ -81,9 +78,5 @@ wget http://download.glidernet.org/common/WW15MGH.DAC -O rtlsdr-ogn/WW15MGH.DAC
 
 # enable and start rtlsdr-ogn service
 sudo systemctl daemon-reload
-#sudo systemctl enable rtlsdr-ogn-rf.service
-#sudo systemctl enable rtlsdr-ogn-decode.service
-#sudo systemctl enable rtlsdr-ogn.target
-#sudo systemctl start rtlsdr-ogn.target
 sudo systemctl enable rtlsdr-ogn
 sudo systemctl start rtlsdr-ogn
