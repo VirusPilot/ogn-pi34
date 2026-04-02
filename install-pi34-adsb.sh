@@ -98,3 +98,15 @@ echo
 read -p "Press any key to continue"
 sudo nano /etc/default/dump1090-fa
 sudo systemctl restart dump1090-fa
+
+echo
+read -t 1 -n 10000 discard  # Clear input buffer
+read -p "Installation complete. Reboot now? [y/n]: " -n 1 -r
+echo    # New line after input
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Rebooting..."
+    sleep 2
+    sudo reboot
+else
+    echo "Reboot skipped. Run 'sudo reboot' manually when ready."
+fi

@@ -132,9 +132,13 @@ sudo systemctl enable ogn2dump1090
 sudo systemctl start ogn2dump1090
 
 echo
-read -t 1 -n 10000 discard
-read -p "Reboot now? [y/n]" -n 1 -r
-echo
+read -t 1 -n 10000 discard  # Clear input buffer
+read -p "Installation complete. Reboot now? [y/n]: " -n 1 -r
+echo    # New line after input
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  sudo reboot
+    echo "Rebooting..."
+    sleep 2
+    sudo reboot
+else
+    echo "Reboot skipped. Run 'sudo reboot' manually when ready."
 fi

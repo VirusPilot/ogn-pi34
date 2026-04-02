@@ -82,3 +82,15 @@ wget http://download.glidernet.org/common/WW15MGH.DAC -O rtlsdr-ogn/WW15MGH.DAC
 sudo systemctl daemon-reload
 sudo systemctl enable rtlsdr-ogn
 sudo systemctl start rtlsdr-ogn
+
+echo
+read -t 1 -n 10000 discard  # Clear input buffer
+read -p "Installation complete. Reboot now? [y/n]: " -n 1 -r
+echo    # New line after input
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Rebooting..."
+    sleep 2
+    sudo reboot
+else
+    echo "Reboot skipped. Run 'sudo reboot' manually when ready."
+fi
