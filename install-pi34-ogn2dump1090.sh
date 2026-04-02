@@ -1,6 +1,8 @@
 #!/bin/bash
 #set -x
 
+cd /home/pi || { echo "Error: /home/pi doesn't exist!"; exit 1; }
+
 sudo apt update
 sudo apt install librtlsdr-dev librtlsdr0 rtl-sdr git cmake lighttpd build-essential fakeroot pkg-config libncurses5-dev libfftw3-bin libusb-1.0-0-dev lynx chrony procserv telnet netcat-traditional debhelper python3-pip python3-aiohttp -y
 sudo apt autoremove -y
