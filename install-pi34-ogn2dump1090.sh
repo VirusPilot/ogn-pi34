@@ -11,35 +11,42 @@ sudo apt autoremove -y
 echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
 
 # install rtlsdr-ogn
-ARCH=$(uname -m)          # linux kernel architecture
-DIST=$(lsb_release -r -s) # linux OS release numer
+ARCH=$(getconf LONG_BIT)  # linux kernel architecture (32 or 64 bit)
+DIST=$(lsb_release -r -s) # linux OS release number
 case "${ARCH}_${DIST}" in
-  aarch64_13|arm64_13)    # 64bit Debian 13 Trixie (aarch64/arm64 platform)
+  64_13)  # 64bit Debian 13 Trixie
     echo
-    echo "installing OGN v0.3.3 (January 2026 version) on 64bit Debian 13 Trixie (aarch64/arm64 platform)"
+    echo "installing OGN v0.3.3 (January 2026 version) on 64bit Debian 13 Trixie"
     echo "press Return to continue or Ctr-C to abort"
     read -r
     tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.3_Trixie.tgz
     ;;
-  aarch64_12|arm64_12)    # 64bit Debian 12 Bookworm (aarch64/arm64 platform)
+  32_13)  # 32bit Debian 13 Trixie
     echo
-    echo "installing OGN v0.3.2 (March 2024 version) on 64bit Debian 12 Bookworm (aarch64/arm64 platform)"
+    echo "installing OGN v0.3.3 (January 2026 version) on 32bit Debian 13 Trixie"
+    echo "press Return to continue or Ctr-C to abort"
+    read -r
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.3_Trixie_noMSHT.tgz
+    ;;
+  64_12)  # 64bit Debian 12 Bookworm
+    echo
+    echo "installing OGN v0.3.2 (March 2024 version) on 64bit Debian 12 Bookworm"
     echo "press Return to continue or Ctr-C to abort"
     read -r
     wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.2.tgz
     tar xvf *.tgz
     rm rtlsdr-ogn-bin-arm64-0.3.2.tgz
     ;;
-  aarch64_11|arm64_11)    # 64bit Debian 11 Bullseye (aarch64/arm64 platform)
+  64_11)  # 64bit Debian 11 Bullseye
     echo
-    echo "installing OGN v0.3.2 (March 2024 version) on 64bit Debian 11 Bullseye (aarch64/arm64 platform)"
+    echo "installing OGN v0.3.2 (March 2024 version) on 64bit Debian 11 Bullseye"
     echo "press Return to continue or Ctr-C to abort"
     read -r
     tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz
     ;;
-  armv7l_11|armv6l_11)    # 32bit Debian 11 Bullseye (armv7l/armv6l platform)
+  32_11)  # 32bit Debian 11 Bullseye
     echo
-    echo "installing OGN v0.3.2 (March 2024 version) on 32bit Debian 11 Bullseye (armv7l/armv6l platform)"
+    echo "installing OGN v0.3.2 (March 2024 version) on 32bit Debian 11 Bullseye"
     echo "press Return to continue or Ctr-C to abort"
     read -r
     wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz
