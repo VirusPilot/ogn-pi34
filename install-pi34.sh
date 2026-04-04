@@ -26,7 +26,7 @@ case "${ARCH}_${DIST}" in
     echo "installing OGN v0.3.3 (January 2026 version) on 32bit Debian 13 Trixie"
     echo "press Return to continue or Ctr-C to abort"
     read -r
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-arm-0.3.3_Trixie_noMSHT.tgz
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.3_Trixie_noMSHT.tgz
     ;;
   64_12)  # 64bit Debian 12 Bookworm
     echo
