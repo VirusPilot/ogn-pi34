@@ -1,11 +1,3 @@
-# NEW: v0.3.3 ogn libraries for 64bit Debian 13 Trixie
-- the [standard install script](#automatic-setup-standard-script) now includes v0.3.3 but only for 64bit Debian 13 Trixie platforms
-- for a fresh sepup, please follow the following steps:
-  - [prepare script](#prepare-script-for-pi3-pi4-pi5-or-pi-zero-2w)
-  - [preparation of credentials](#preparation-of-credentials)
-  - [one of the following install scripts](#scripts-to-built-a-receiver-station-to-feed-the-open-glider-network)
-- the docker versions have also been upgraded to v0.3.3, the containers are running 64bit Debian 13 Trixie inside but can be hosted on older platforms like 64bit Debian 11 or 12
-
 # scripts to built a receiver station to feed the Open Glider Network:
 - [standard install script](#automatic-setup-standard-script)
 - [install script with OGN and ADS-B (using dump1090-fa)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
@@ -13,8 +5,10 @@
 # docker versions are available here (recommended)
 - https://github.com/VirusPilot/docker-ogn
 - https://github.com/VirusPilot/docker-ogn2readsb
-## supported platform by these scripts:
-- Trixie (Debian 13): 64bit (with native RTL-SDR Blog v4 support)
+## supported platform and OS by these scripts (rtlsdr-ogn-bin-arm64-0.3.3.tgz):
+- arm64 (64-bit ARM CPUs with hardware floating point processor), Debian 13 Trixie (includes native RTL-SDR Blog v4 support)
+## supported platform for manual install (rtlsdr-ogn-bin-x64-0.3.3.tgz):
+- x64 (64-bit AMD/Intel CPUs)
 ## details about the scripts
 - standard script: `install-pi34.sh`
 - alternative script (1): `install-pi34-adsb.sh`
@@ -29,8 +23,8 @@
   - inject Open Glider Network Traffic for display on a unified local tar1090 map
 - Pi Zero 2W, Pi3, Pi4 or Pi5 are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
-- latest 0.3.2 version enables **SDR autogain** to avoid crossmodulation
-- latest 0.3.2 version supports the following protocols:
+- latest 0.3.3 version enables **SDR autogain** to avoid crossmodulation
+- latest 0.3.3 version supports the following protocols:
   - ADS-B (requires `dump1090-fa` runing on the same receiver but on a **second SDR**)
   - FLARM
   - OGN
