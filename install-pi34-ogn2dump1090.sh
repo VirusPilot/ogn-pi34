@@ -11,23 +11,15 @@ sudo apt autoremove -y
 echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
 
 # install rtlsdr-ogn
-ARCH=$(getconf LONG_BIT)  # linux kernel architecture (32 or 64 bit)
+ARCH=$(arch) # linux architecture 
 DIST=$(lsb_release -r -s) # linux OS release number
 case "${ARCH}_${DIST}" in
-  64_13)  # 64bit Debian 13 Trixie
+  aarch64_13)
     echo
-    echo "installing OGN v0.3.3 on 64bit Debian 13 Trixie"
+    echo "installing OGN v0.3.3 on aarch64 Debian 13 Trixie"
     echo "press Return to continue or Ctr-C to abort"
     read -r
     tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.3.tgz
-    ;;
-  x86_64_22.*|x86_64_23.*|x86_64_24.*|x86_64_25.*|x86_64_26.*|x86_64_12|x86_64_13)
-    echo
-    echo "installing OGN v0.3.3 on 64bit Linux (x86_64 Ubuntu or Debian) is not supported"
-    echo "please consider using the related docker version or do a manual install"
-    echo "press Return to exit"
-    read -r
-    exit 1
     ;;
   *)
     echo
