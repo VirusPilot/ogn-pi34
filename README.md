@@ -1,10 +1,10 @@
 # NEW: v0.3.3 ogn libraries for 64bit Debian 13 Trixie
-- the [standard install script](#automatic-setup-standard-script) now includes v0.3.3 (January 2026) but only for 64bit Debian 13 Trixie platforms, on older platforms (64bit Debian 11, 12 or 32bit Debian 11) v0.3.2 (March 2024 version) is installed, therefore please consider upgrading to 64bit Debian 13 Trixie
+- the [standard install script](#automatic-setup-standard-script) now includes v0.3.3 but only for 64bit Debian 13 Trixie platforms
 - for a fresh sepup, please follow the following steps:
   - [prepare script](#prepare-script-for-pi3-pi4-pi5-or-pi-zero-2w)
   - [preparation of credentials](#preparation-of-credentials)
   - [one of the following install scripts](#scripts-to-built-a-receiver-station-to-feed-the-open-glider-network)
-- the docker versions have already been upgraded to v0.3.3, the containers are running 64bit Debian 13 Trixie inside but can be hosted on older platforms like 64bit Debian 11 or 12
+- the docker versions have also been upgraded to v0.3.3, the containers are running 64bit Debian 13 Trixie inside but can be hosted on older platforms like 64bit Debian 11 or 12
 
 # scripts to built a receiver station to feed the Open Glider Network:
 - [standard install script](#automatic-setup-standard-script)
@@ -13,12 +13,8 @@
 # docker versions are available here (recommended)
 - https://github.com/VirusPilot/docker-ogn
 - https://github.com/VirusPilot/docker-ogn2readsb
-## supported platforms by these scripts:
-- **Trixie (Debian 13): 64bit (with native RTL-SDR Blog v4 support)**
-- Bookworm (Debian 12): 64bit
-- Bookworm (Debian 12): 32bit
-- Bullseye (Debian 11): 32bit
-- for older RasPiOS versions please consider a manual update as described below, you can find out your platform version and architecture with `getconf LONG_BIT` (shows the Debian version) and `lsb_release -r -s` (32bit or 64bit)
+## supported platform by these scripts:
+- Trixie (Debian 13): 64bit (with native RTL-SDR Blog v4 support)
 ## details about the scripts
 - standard script: `install-pi34.sh`
 - alternative script (1): `install-pi34-adsb.sh`
@@ -47,14 +43,6 @@
   - Spidertracks
   - ADS-L
   - ...
-
-## packages for manual update of legacy platforms
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz (64-bit ARM aarch64)
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie.tgz (32-bit ARM)
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-ARM-0.3.2_Jessie_JPEG.tgz (32-bit ARM)
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie.tgz (32-bit ARM)
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-RPI-GPU-0.3.2_Jessie_JPEG.tgz (32-bit ARM)
-- https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-x86-0.3.2_Buster.tgz (32-bit Intel 80386)
 
 ## prepare script for Pi3, Pi4, Pi5 or Pi Zero 2W:
 - flash **latest RasPiOS Lite Image** (32bit or 64bit), using latest [Raspberry Pi Imager](https://www.raspberrypi.com/software/) with the following settings:
@@ -164,18 +152,8 @@ crosscheck (after the reboot):
 - e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
 - e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
 - e.g. http://raspberrypi/tar1090 for monitoring OGN and ADS-B traffic on the unified map
-## steps to manually upgrade legacy platforms
-`ogn-rf` and `ogn-decode` need to be replaced, here are the required steps:
-- `mkdir temp`
-- `cd temp`
-- find out whether you are running 32bit or 64bit with `getconf LONG_BIT`
-- to update a 64bit RasPiOS Bullseye receiver:
-  - `wget https://github.com/VirusPilot/ogn-pi34/raw/master/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz`
-- to update a 32bit RasPiOS Bullseye receiver:
-  - `wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz`
-- `tar xvf *.tgz`
-- `cp -f rtlsdr-ogn/ogn-* <your_current_rtlsdr-ogn_folder>`
-- if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
+
+## if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
   ```
   ADSB:
   {

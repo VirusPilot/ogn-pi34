@@ -16,46 +16,14 @@ DIST=$(lsb_release -r -s) # linux OS release number
 case "${ARCH}_${DIST}" in
   64_13)  # 64bit Debian 13 Trixie
     echo
-    echo "installing OGN v0.3.3 (January 2026 version) on 64bit Debian 13 Trixie"
+    echo "installing OGN v0.3.3 on 64bit Debian 13 Trixie"
     echo "press Return to continue or Ctr-C to abort"
     read -r
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.3_Trixie.tgz
-    ;;
-  32_13)  # 32bit Debian 13 Trixie
-    echo
-    echo "installing OGN v0.3.3 (January 2026 version) on 32bit Debian 13 Trixie"
-    echo "press Return to continue or Ctr-C to abort"
-    read -r
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.3_Trixie_noMSHT.tgz
-    ;;
-  64_12)  # 64bit Debian 12 Bookworm
-    echo
-    echo "installing OGN v0.3.2 (March 2024 version) on 64bit Debian 12 Bookworm"
-    echo "press Return to continue or Ctr-C to abort"
-    read -r
-    wget http://download.glidernet.org/arm64/rtlsdr-ogn-bin-arm64-0.3.2.tgz
-    tar xvf *.tgz
-    rm rtlsdr-ogn-bin-arm64-0.3.2.tgz
-    ;;
-  64_11)  # 64bit Debian 11 Bullseye
-    echo
-    echo "installing OGN v0.3.2 (March 2024 version) on 64bit Debian 11 Bullseye"
-    echo "press Return to continue or Ctr-C to abort"
-    read -r
-    tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.2_Bullseye.tgz
-    ;;
-  32_11)  # 32bit Debian 11 Bullseye
-    echo
-    echo "installing OGN v0.3.2 (March 2024 version) on 32bit Debian 11 Bullseye"
-    echo "press Return to continue or Ctr-C to abort"
-    read -r
-    wget http://download.glidernet.org/arm/rtlsdr-ogn-bin-ARM-0.3.2.tgz
-    tar xvf *.tgz
-    rm rtlsdr-ogn-bin-ARM-0.3.2.tgz
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.3.tgz
     ;;
   x86_64_22.*|x86_64_23.*|x86_64_24.*|x86_64_25.*|x86_64_26.*|x86_64_12|x86_64_13)
     echo
-    echo "installing OGN v0.3.3 (January 2026 version) on 64bit Linux (x86_64 Ubuntu or Debian) is not supported"
+    echo "installing OGN v0.3.3 on 64bit Linux (x86_64 Ubuntu or Debian) is not supported"
     echo "please consider using the related docker version or do a manual install"
     echo "press Return to exit"
     read -r
