@@ -5,9 +5,9 @@
 # docker versions are available, support for both arm64 and x64 platforms
 - https://github.com/VirusPilot/docker-ogn
 - https://github.com/VirusPilot/docker-ogn2readsb
-## supported platform and OS by these scripts (rtlsdr-ogn-bin-arm64-0.3.3.tgz):
+## supported platform and OS by these scripts (using rtlsdr-ogn-bin-arm64-0.3.3.tgz):
 - arm64 (64-bit ARM CPUs with hardware floating point processor), Debian 13 Trixie (includes native RTL-SDR Blog v4 support)
-## supported platform for manual install (rtlsdr-ogn-bin-x64-0.3.3.tgz):
+## supported platform for manual install (using rtlsdr-ogn-bin-x64-0.3.3.tgz):
 - x64 (64-bit AMD/Intel CPUs)
 - libavcodec-dev is required (significantly lower CPU usage)
 - several config files need to be modified, therefore only intended for experts
