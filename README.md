@@ -9,7 +9,6 @@
 - arm64 (64-bit ARM CPUs with hardware floating point processor), Debian 13 Trixie (includes native RTL-SDR Blog v4 support)
 ## supported platform for manual install (using rtlsdr-ogn-bin-x64-0.3.3.tgz):
 - x64 (64-bit AMD/Intel CPUs)
-- libavcodec-dev is required (significantly lower CPU usage)
 - several config files need to be modified, therefore only intended for experts
 ## details about the scripts
 - standard script: `install-pi34.sh`
