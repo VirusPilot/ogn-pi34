@@ -2,13 +2,15 @@
 - [standard install script](#automatic-setup-standard-script)
 - [install script with OGN and ADS-B (using dump1090-fa)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
 - [ogn2readsb install script (OGN and ADS-B on a unified tar1090 map, using readsb)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090)
-# docker versions are available here (recommended)
+# docker versions are available, support for both arm64 and x64 platforms
 - https://github.com/VirusPilot/docker-ogn
 - https://github.com/VirusPilot/docker-ogn2readsb
 ## supported platform and OS by these scripts (rtlsdr-ogn-bin-arm64-0.3.3.tgz):
 - arm64 (64-bit ARM CPUs with hardware floating point processor), Debian 13 Trixie (includes native RTL-SDR Blog v4 support)
 ## supported platform for manual install (rtlsdr-ogn-bin-x64-0.3.3.tgz):
 - x64 (64-bit AMD/Intel CPUs)
+- libavcodec-dev is required (significantly lower CPU usage)
+- several config files need to be modified, therefore only intended for experts
 ## details about the scripts
 - standard script: `install-pi34.sh`
 - alternative script (1): `install-pi34-adsb.sh`
