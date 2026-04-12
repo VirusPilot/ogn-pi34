@@ -10,6 +10,7 @@
 ## supported platform for manual install (using rtlsdr-ogn-bin-x64-0.3.3.tgz):
 - x64 (64-bit AMD/Intel CPUs)
 - several config files need to be modified, therefore only intended for experts
+- a CPU saving version (using libavcodec statically linked) is also available (rtlsdr-ogn-bin-x64-0.3.3_libavcodec.tgz)
 ## details about the scripts
 - standard script: `install-pi34.sh`
 - alternative script (1): `install-pi34-adsb.sh`
