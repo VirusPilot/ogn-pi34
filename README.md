@@ -61,6 +61,9 @@ SDR selection and ppm correction:
 ```
 RF:
 {
+  Async = 1;               # = 0, frequency calibration based on GSM signals
+                           # = 1, (default) causes the RF to read data continously without any gaps, required for Time-of-Arrival service
+                           # = 2, same as Async = 1 but latency is further reduced by 50%
   Device   = 0;            # device selection based on SDR index number, please doublecheck post-install using "rtl_test"
   #DeviceSerial = "868";   # alternative device selection based on SDR serial number (SN), please doublecheck post-install using "rtl_test"
   FreqCorr = 0;            # [ppm] SDR correction factor, newer sticks have a TCXO so no correction required
