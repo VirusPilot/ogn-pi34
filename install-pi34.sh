@@ -21,6 +21,13 @@ case "${ARCH}_${DIST}" in
     read -r
     tar xvf ogn-pi34/rtlsdr-ogn-bin-arm64-0.3.3.tgz
     ;;
+  armv7l_13)
+    echo
+    echo "installing OGN v0.3.3 on armv7l Debian 13 Trixie"
+    echo "press Return to continue or Ctr-C to abort"
+    read -r
+    tar xvf ogn-pi34/rtlsdr-ogn-bin-ARM-0.3.3.tgz
+    ;;
   *)
     echo
     echo "wrong platform for this script, exiting"
