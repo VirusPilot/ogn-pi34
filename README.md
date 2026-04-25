@@ -1,7 +1,7 @@
 # scripts to built a receiver station to feed the Open Glider Network:
-- [standard install script](#automatic-setup-standard-script)
-- [install script with OGN and ADS-B (using dump1090-fa)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
-- [ogn2readsb install script (OGN and ADS-B on a unified tar1090 map, using readsb)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090)
+- [standard install script](#automatic-setup-standard-script) (32bit and 64bit)
+- [install script with OGN and ADS-B (using dump1090-fa)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition) (64bit)
+- [ogn2readsb install script (OGN and ADS-B on a unified tar1090 map, using readsb)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090) (64bit)
 # docker versions are available, support for both arm64 and x64 platforms
 - https://github.com/VirusPilot/docker-ogn
 - https://github.com/VirusPilot/docker-ogn2readsb
@@ -12,7 +12,7 @@
 - several config files need to be modified, therefore only intended for experts
 - a CPU saving version (using libavcodec statically linked) is also available (rtlsdr-ogn-bin-x64-0.3.3_libavcodec.tgz)
 ## details about the scripts
-- standard script: `install-pi34.sh`
+- standard script: `install-pi34.sh` (32bit and 64bit)
 - alternative script (1): `install-pi34-adsb.sh`
   - requires a **second SDR**
   - installs https://github.com/VirusPilot/dump1090 in addition to feed Open Glider Network with ADS-B
