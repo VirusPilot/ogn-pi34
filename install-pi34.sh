@@ -4,7 +4,7 @@
 cd /home/pi || { echo "Error: /home/pi doesn't exist!"; exit 1; }
 
 sudo apt update
-sudo apt install librtlsdr-dev librtlsdr0 rtl-sdr git cmake libfftw3-bin libusb-1.0-0-dev lynx chrony procserv telnet netcat-traditional debhelper -y
+sudo apt install librtlsdr-dev librtlsdr0 rtl-sdr git cmake libfftw3-bin libusb-1.0-0-dev lynx chrony procserv telnet netcat-traditional debhelper unzip -y
 sudo apt autoremove -y
 
 # legacy DVB-T TV drivers need to be properly blacklisted (e.g. they will activate the bias tee by default)
