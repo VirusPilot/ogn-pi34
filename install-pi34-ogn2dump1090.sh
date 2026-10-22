@@ -47,7 +47,7 @@ read -p "Press any key to continue"
 nano rtlsdr-ogn/Template.conf
 
 # download EGM grid file
-wget http://download.glidernet.org/common/WW15MGH.DAC -O rtlsdr-ogn/WW15MGH.DAC
+cp -v ogn-pi34/WW15MGH.DAC rtlsdr-ogn/WW15MGH.DAC
 
 # enable and start rtlsdr-ogn service
 sudo cp -v rtlsdr-ogn/rtlsdr-ogn.conf /etc/rtlsdr-ogn.conf
