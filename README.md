@@ -151,21 +151,6 @@ crosscheck (after the reboot):
 - e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
 - e.g. http://raspberrypi/tar1090 for monitoring OGN and ADS-B traffic on the unified map
 
-## if you have a dump1090-fa instance already running and want to feed OGN with ADS-B traffic, you need to add the following section to your OGN configuration file:
-  ```
-  ADSB:
-  {
-    AVR = "localhost:30002";
-    MaxAlt = 18000;
-  };
-  ```
-- `cd <your_current_rtlsdr-ogn_folder>`
-- `sudo chown root gsm_scan ogn-rf rtlsdr-ogn`
-- `sudo chmod a+s gsm_scan ogn-rf rtlsdr-ogn`
-- 'sudo mknod gpu_dev c 100 0` (only required for GPU version)
-- `sudo service rtlsdr-ogn restart` or `sudo reboot`
-- `sudo service rtlsdr-ogn status` (to verify that the new version is running)
-
 ## post install modifications
 - please note that an accurate Raspberry Pi system time is required for a proper decoding of traffic, e.g. synchronized via systemd-timesyncd (default) or ntp
 ### remove Raspberry Pi USB power supply limitation
