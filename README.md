@@ -1,32 +1,33 @@
-# scripts to built a receiver station to feed the Open Glider Network:
-- [standard install script](#automatic-setup-standard-script)
-- [install script with OGN and ADS-B (using dump1090-fa)](#automatic-setup-1-alternative-script-that-installs-dump1090-fa-in-addition)
-- [ogn2readsb install script (OGN and ADS-B on a unified tar1090 map, using readsb)](#automatic-setup-2-alternative-script-that-installs-rtlsrd-ogn-readsb-and-ogn2dump1090)
+# script to build a receiver station to feed the Open Glider Network:
+- [install script](#automatic-setup) usage:
+  - `install-pi34.sh ogn` installing only OGN feed
+  - `install-pi34.sh dump1090` installing OGN/ADSB feed (including dump1090)
+  - `install-pi34.sh ogn2readsb` installing OGN/ADSB feed  (including readsb and unified local tar1090 traffic map)
 # docker versions are available, support for both arm64 and x64 platforms
-- https://github.com/VirusPilot/docker-ogn (equivalent to standard script)
-- https://github.com/VirusPilot/docker-ogn2readsb (equivalent to ogn2readsb script)
+- https://github.com/VirusPilot/docker-ogn (equivalent to the OGN-only install option)
+- https://github.com/VirusPilot/docker-ogn2readsb (equivalent to the ogn2readsb install option)
 ## supported platform and OS by these scripts (using rtlsdr-ogn-bin-arm64-0.3.3.tgz):
 - armhf/arm64 (32/64-bit ARM CPUs with hardware floating point processor), Debian 13 Trixie (includes native RTL-SDR Blog v4 support)
 ## supported platform for manual install (using rtlsdr-ogn-bin-x64-0.3.3.tgz):
 - x64 (64-bit AMD/Intel CPUs)
 - several config files need to be modified, therefore only intended for experts
-## details about the scripts
-- standard script: `install-pi34.sh`
-- alternative script (1): `install-pi34-adsb.sh`
+## installation options
+- `install-pi34.sh ogn` installs OGN only
+- `install-pi34.sh dump1090`
   - requires a **second SDR**
   - installs https://github.com/VirusPilot/dump1090 in addition to feed Open Glider Network with ADS-B
   - ADS-B SDR adaptive gain and adaptive burst mode enabled (to prefer local traffic)
-- alternative script (2): `install-pi34-ogn2dump1090.sh`
+- `install-pi34.sh ogn2readsb`
   - requires a **second SDR**
   - installs https://github.com/wiedehopf/readsb
   - installs https://github.com/b3nn0/ogn2dump1090
   - feeds Open Glider Network with ADS-B
-  - inject Open Glider Network Traffic for display on a unified local tar1090 map
+  - inject Open Glider Network Traffic for display on a unified local tar1090 traffic map
 - Pi Zero 2W, Pi3, Pi4 or Pi5 are supported
 - Raspberry Pi Imager (https://www.raspberrypi.com/software/) is recommended
 - latest 0.3.3 version enables **SDR autogain** to avoid crossmodulation
 - latest 0.3.3 version supports the following protocols:
-  - ADS-B (requires `dump1090-fa` runing on the same receiver but on a **second SDR**)
+  - ADS-B (requires `dump1090` or `readsb`runing on the same receiver but on a **second SDR**)
   - FLARM
   - OGN
   - SafeSky
@@ -50,11 +51,11 @@
 - **all scripts need to be exectuted from the /home/pi directory**
 
 ## preparation of credentials
-During the setup process you will be automatically asked to edit `Template.conf` and potentially `dump1090-fa` for which you should have the following credentials at hand:
+During the setup process you will be automatically asked to edit `Template.conf` and potentially `dump1090` or `readsb` for which you should have the following credentials at hand:
 - SDR index numbers or SDR serial numbers (SN) for both the OGN and ADS-B SDRs
 - SDR ppm calibration (only required for non-TCXO SDRs), this can also be measured and modified accordingly post install if unknown
 - OGN station name, e.g. your local airport ICAO code (max. 9 characters), please refer to http://wiki.glidernet.org/receiver-naming-convention
-- station coordinates and altitude for both the OGN and ADS-B configuration file
+- station coordinates and altitude for both the OGN and ADS-B configuration files
 
 SDR selection and ppm correction:
 ```
@@ -104,15 +105,15 @@ APRS:
                                # please refer to http://wiki.glidernet.org/receiver-naming-convention
 };
 ```
-In case you plan to combine the OGN station with a dump1090-fa feeder (like in the alternative install script below), the following section is required:
+In case you plan to combine the OGN station with a dump1090 feeder (like in the alternative install script below), the following section is required:
 ```
 HTTP:           # this section is required to be able to monitor the different status pages of your receiver
-{               # e.g. http://raspberrypi:8080 for monitoring ADS-B traffic
+{               # e.g. http://raspberrypi:8080 for monitoring dump1090 ADS-B traffic
   Port = 8082;  # e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
 };              # e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
 ```
 
-## automatic setup (standard script)
+## automatic setup
 - plug your SD card into the Pi, connect your Pi3, Pi4 or Pi5 to LAN via Ethernet cable and boot (in case of Pi Zero 2W you may need to wait and check for successful WiFi connection)
 - connect to your pi using ssh
 ```
@@ -122,37 +123,38 @@ sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
 ./ogn-pi34/install-pi34.sh
 ```
+The default installs OGN only. To select an ADS-B option, run `./ogn-pi34/install-pi34.sh dump1090` or `./ogn-pi34/install-pi34.sh ogn2readsb` instead.
 crosscheck:
 - e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
 - e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
-## automatic setup 1 (alternative script that installs dump1090-fa in addition)
+## optional: add dump1090
 - based on https://github.com/VirusPilot/dump1090
 ```
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
-./ogn-pi34/install-pi34-adsb.sh
+./ogn-pi34/install-pi34.sh dump1090
 ```
 crosscheck:
 - e.g. http://raspberrypi:8080 for monitoring ADS-B traffic
 - e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
 - e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
-## automatic setup 2 (alternative script that installs rtlsrd-ogn, readsb and ogn2dump1090)
+## optional: add readsb and ogn2dump1090 (aka ogn2readsb)
 ```
 sudo apt update
 sudo apt full-upgrade -y
 sudo apt install git -y
 git clone https://github.com/VirusPilot/ogn-pi34.git
-./ogn-pi34/install-pi34-ogn2dump1090.sh
+./ogn-pi34/install-pi34.sh ogn2readsb
 ```
 crosscheck (after the reboot):
 - e.g. http://raspberrypi:8082 for monitoring the RTLSDR OGN RF processor status page
 - e.g. http://raspberrypi:8083 for monitoring the RTLSDR OGN demodulator and decoder status page
-- e.g. http://raspberrypi/tar1090 for monitoring OGN and ADS-B traffic on the unified map
+- e.g. http://raspberrypi/tar1090 for monitoring OGN and ADS-B traffic on the unified tar1090 traffic map
 
 ## post install modifications
-- please note that an accurate Raspberry Pi system time is required for a proper decoding of traffic, e.g. synchronized via systemd-timesyncd (default) or ntp
+- please note that an accurate Raspberry Pi system time is required for a proper decoding of traffic, e.g. synchronized via systemd-timesyncd (default) or chrony
 ### remove Raspberry Pi USB power supply limitation
 - it might be necessary to remove the Raspberry Pi5 USB power supply limitation by adding `usb_max_current_enable=1` to `/boot/config.txt` (`/boot/firmware/config.txt` in case of Bookworm or Trixie)
 ### SDR ppm correction (mandatory for non-TCXO SDRs)
