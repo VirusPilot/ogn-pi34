@@ -1,5 +1,5 @@
 ## script to build a receiver station to feed the Open Glider Network:
-- [install script](#automatic-setup) usage:
+- install script usage:
   - `install-pi34.sh ogn` installing only OGN feed
   - `install-pi34.sh dump1090` installing OGN/ADSB feed (including dump1090)
   - `install-pi34.sh ogn2readsb` installing OGN/ADSB feed  (including readsb and unified local tar1090 traffic map)
