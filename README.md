@@ -183,10 +183,6 @@ crosscheck (after the reboot):
   - `sudo systemctl enable watchdog`
   - `sudo systemctl start watchdog`
   - `journalctl --list-boots` lists all reboots
-- ### optional: disable swapfile
-- `sudo systemctl disable dphys-swapfile`
-- `sudo apt purge dphys-swapfile -y`
-- `sudo apt autoremove -y`
 ### optional: enable read-only file system
 - `sudo raspi-config`
 - -> 4 Performance Options / P2 Overlay File System -> yes (not required for the boot partition)
