@@ -3,20 +3,20 @@
 set -e
 
 if (( $# == 0 )); then
-  printf 'Usage: %s [ogn|dump1090|ogn2readsb]\n' "$0"
+  printf 'Usage: %s [ogn|dump1090|ogn-sbs-readsb|ogn-asterix-readsb]\n' "$0"
   exit 0
 fi
 
 MODE=$1
 if (( $# > 1 )); then
-  printf 'Usage: %s [ogn|dump1090|ogn2readsb]\n' "$0" >&2
+  printf 'Usage: %s [ogn|dump1090|ogn-sbs-readsb|ogn-asterix-readsb]\n' "$0" >&2
   exit 2
 fi
 case "$MODE" in
-  ogn|dump1090|ogn2readsb)
+  ogn|dump1090|ogn-sbs-readsb|ogn-asterix-readsb)
     ;;
   *)
-    printf 'Usage: %s [ogn|dump1090|ogn2readsb]\n' "$0" >&2
+    printf 'Usage: %s [ogn|dump1090|ogn-sbs-readsb|ogn-asterix-readsb]\n' "$0" >&2
     exit 2
     ;;
 esac
@@ -26,20 +26,20 @@ cd /home/pi || { echo "Error: /home/pi doesn't exist!" >&2; exit 1; }
 PACKAGES=(
   librtlsdr-dev librtlsdr0 rtl-sdr git cmake libfftw3-bin libusb-1.0-0-dev
   lynx chrony procserv telnet netcat-traditional debhelper unzip
+  ca-certificates lsb-release nano sudo wget
 )
 case "$MODE" in
   dump1090)
-    PACKAGES+=(build-essential fakeroot pkg-config libncurses5-dev)
+    PACKAGES+=(build-essential fakeroot pkg-config libncurses-dev)
     ;;
-  ogn2readsb)
-    PACKAGES+=(lighttpd build-essential fakeroot pkg-config libncurses5-dev
+  ogn-sbs-readsb|ogn-asterix-readsb)
+    PACKAGES+=(lighttpd build-essential fakeroot pkg-config libncurses-dev
       python3-pip python3-aiohttp gettext-base)
     ;;
 esac
 
 sudo apt update
 sudo apt install "${PACKAGES[@]}" -y
-sudo apt autoremove -y
 
 # Legacy DVB-T TV drivers may enable the bias tee which may damage the RTL-SDR dongle. Blacklist the drivers to avoid this.
 echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
@@ -70,7 +70,7 @@ printf '\nReceiver configuration\n'
 printf 'Edit rtlsdr-ogn/Template.conf and set:\n'
 printf '  - PPM correction and GSM calibration frequency\n'
 printf '  - Receiver location and APRS name\n'
-if [[ "$MODE" == ogn2readsb ]]; then
+if [[ "$MODE" == ogn-sbs-readsb ]]; then
   printf '  - Server = "localhost:14580" to enable the APRS server function\n'
 fi
 printf '\nPress Enter to open the configuration file.\n'
@@ -102,7 +102,7 @@ case "$MODE" in
     sudo nano /etc/default/dump1090-fa
     sudo systemctl restart dump1090-fa
     ;;
-  ogn2readsb)
+  ogn-sbs-readsb)
     cd
     sudo bash -c "$(wget -O - https://github.com/wiedehopf/adsb-scripts/raw/master/readsb-install.sh)"
 
@@ -145,6 +145,27 @@ case "$MODE" in
     sudo mv ogn2dump1090.service /etc/systemd/system/
     sudo systemctl enable ogn2dump1090
     sudo systemctl start ogn2dump1090
+    ;;
+  ogn-asterix-readsb)
+    cd
+    sudo bash -c "$(wget -O - https://github.com/wiedehopf/adsb-scripts/raw/master/readsb-install.sh)"
+
+    printf '\nreadsb configuration\n'
+    printf 'Edit /etc/default/readsb and set the device ID (or serial) and receiver coordinates.\n'
+    printf 'Example settings:\n'
+    printf '%s\n' \
+      '  RECEIVER_OPTIONS="--device 1090 --device-type rtlsdr --gain auto-verbose --ppm 0"' \
+      '  DECODER_OPTIONS="--lat 48.0 --lon 10.0 --max-range 0 --write-json-every 1"'
+    printf '\nPress Enter to open the configuration file.\n'
+    read -r
+    sudo nano /etc/default/readsb
+
+    sudo cp -f ogn-pi34/Platzrunden+Segler_N_5.25.7.geojson \
+      /usr/local/share/tar1090/html/geojson/UK_Mil_RC.geojson
+
+    cd
+    git clone https://github.com/VirusPilot/ogn-asterix-bridge
+    sh /home/pi/ogn-asterix-bridge/install.sh
     ;;
 esac
 
